@@ -1,0 +1,6 @@
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Exceptions\bin\Debug\Exceptions.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Exceptions\bin\Debug\Exceptions.pdb
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Exceptions\obj\Debug\Exceptions.csproj.AssemblyReference.cache
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Exceptions\obj\Debug\Exceptions.csproj.CoreCompileInputs.cache
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Exceptions\obj\Debug\Exceptions.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Exceptions\obj\Debug\Exceptions.pdb

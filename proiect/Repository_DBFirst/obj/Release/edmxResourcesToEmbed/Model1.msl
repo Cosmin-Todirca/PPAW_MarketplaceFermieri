@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="marketplace_fermieriModelStoreContainer" CdmEntityContainer="marketplace_fermieriEntities">
+    <EntitySetMapping Name="client">
+      <EntityTypeMapping TypeName="marketplace_fermieriModel.clienti">
+        <MappingFragment StoreEntitySet="clienti">
+          <ScalarProperty Name="idClient" ColumnName="idClient" />
+          <ScalarProperty Name="numeClient" ColumnName="numeClient" />
+          <ScalarProperty Name="prenumeClient" ColumnName="prenumeClient" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="numarTelefon" ColumnName="numarTelefon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comanda">
+      <EntityTypeMapping TypeName="marketplace_fermieriModel.comenzi">
+        <MappingFragment StoreEntitySet="comenzi">
+          <ScalarProperty Name="idComanda" ColumnName="idComanda" />
+          <ScalarProperty Name="idClient" ColumnName="idClient" />
+          <ScalarProperty Name="dataComanda" ColumnName="dataComanda" />
+          <ScalarProperty Name="situatieComanda" ColumnName="situatieComanda" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="obiectComanda">
+      <EntityTypeMapping TypeName="marketplace_fermieriModel.obiecteComanda">
+        <MappingFragment StoreEntitySet="obiecteComanda">
+          <ScalarProperty Name="idObiectComanda" ColumnName="idObiectComanda" />
+          <ScalarProperty Name="idComanda" ColumnName="idComanda" />
+          <ScalarProperty Name="idProdus" ColumnName="idProdus" />
+          <ScalarProperty Name="idClient" ColumnName="idClient" />
+          <ScalarProperty Name="situatiePlata" ColumnName="situatiePlata" />
+          <ScalarProperty Name="cantitateComanda" ColumnName="cantitateComanda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="produs">
+      <EntityTypeMapping TypeName="marketplace_fermieriModel.produse">
+        <MappingFragment StoreEntitySet="produse">
+          <ScalarProperty Name="idProdus" ColumnName="idProdus" />
+          <ScalarProperty Name="idVanzator" ColumnName="idVanzator" />
+          <ScalarProperty Name="numeProdus" ColumnName="numeProdus" />
+          <ScalarProperty Name="descriereProdus" ColumnName="descriereProdus" />
+          <ScalarProperty Name="pret" ColumnName="pret" />
+          <ScalarProperty Name="unitateDeMasura" ColumnName="unitateDeMasura" />
+          <ScalarProperty Name="cantitate" ColumnName="cantitate" />
+          <ScalarProperty Name="imagine" ColumnName="imagine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vanzator">
+      <EntityTypeMapping TypeName="marketplace_fermieriModel.vanzatori">
+        <MappingFragment StoreEntitySet="vanzatori">
+          <ScalarProperty Name="idVanzator" ColumnName="idVanzator" />
+          <ScalarProperty Name="numeVanzator" ColumnName="numeVanzator" />
+          <ScalarProperty Name="prenumeVanzator" ColumnName="prenumeVanzator" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="numarTelefon" ColumnName="numarTelefon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

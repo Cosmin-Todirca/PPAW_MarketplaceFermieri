@@ -1,0 +1,59 @@
+﻿@model ViewModels.ReadVanzatorViewModel
+
+@{
+    ViewBag.Title = "DetailsMVC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vanzator</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idVanzator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idVanzator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numeVanzator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numeVanzator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prenumeVanzator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenumeVanzator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numarTelefon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numarTelefon)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditMVC", new { id = Model.idVanzator }) |
+    @Html.ActionLink("Back to List", "IndexMVC")
+</p>

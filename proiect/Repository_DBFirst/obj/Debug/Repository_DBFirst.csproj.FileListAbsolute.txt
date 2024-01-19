@@ -1,0 +1,12 @@
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\bin\Debug\Repository_DBFirst.dll.config
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\bin\Debug\Repository_DBFirst.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\bin\Debug\Repository_DBFirst.pdb
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\bin\Debug\EntityFramework.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\bin\Debug\EntityFramework.SqlServer.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\bin\Debug\EntityFramework.xml
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\bin\Debug\EntityFramework.SqlServer.xml
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\obj\Debug\Repository_DBFirst.csproj.AssemblyReference.cache
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\obj\Debug\Repository_DBFirst.csproj.CoreCompileInputs.cache
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\obj\Debug\Repository_DBFirst.csproj.CopyComplete
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\obj\Debug\Repository_DBFirst.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_DBFirst\obj\Debug\Repository_DBFirst.pdb

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ViewModels.ReadVanzatorViewModel>
+
+@{
+    ViewBag.Title = "IndexMVC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateMVC")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().idVanzator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().numeVanzator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().prenumeVanzator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().numarTelefon)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idVanzator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numeVanzator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prenumeVanzator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numarTelefon)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditMVC", new { id = item.idVanzator }) |
+                @Html.ActionLink("Details", "DetailsMVC", new { id = item.idVanzator })
+            </td>
+        </tr>
+    }
+
+</table>
+

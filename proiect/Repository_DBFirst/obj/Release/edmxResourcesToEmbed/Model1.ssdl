@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="marketplace_fermieriModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="clienti">
+    <Key>
+      <PropertyRef Name="idClient" />
+    </Key>
+    <Property Name="idClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numeClient" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="prenumeClient" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="200" />
+    <Property Name="numarTelefon" Type="varchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <EntityType Name="comenzi">
+    <Key>
+      <PropertyRef Name="idComanda" />
+    </Key>
+    <Property Name="idComanda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idClient" Type="int" Nullable="false" />
+    <Property Name="dataComanda" Type="datetime" Nullable="false" />
+    <Property Name="situatieComanda" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="total" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="obiecteComanda">
+    <Key>
+      <PropertyRef Name="idObiectComanda" />
+    </Key>
+    <Property Name="idObiectComanda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idComanda" Type="int" Nullable="false" />
+    <Property Name="idProdus" Type="int" Nullable="false" />
+    <Property Name="idClient" Type="int" Nullable="false" />
+    <Property Name="situatiePlata" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="cantitateComanda" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="produse">
+    <Key>
+      <PropertyRef Name="idProdus" />
+    </Key>
+    <Property Name="idProdus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idVanzator" Type="int" Nullable="false" />
+    <Property Name="numeProdus" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descriereProdus" Type="varchar" MaxLength="200" />
+    <Property Name="pret" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="unitateDeMasura" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cantitate" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="imagine" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="vanzatori">
+    <Key>
+      <PropertyRef Name="idVanzator" />
+    </Key>
+    <Property Name="idVanzator" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numeVanzator" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="prenumeVanzator" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="200" />
+    <Property Name="numarTelefon" Type="varchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_comenzi_comenzi">
+    <End Role="clienti" Type="Self.clienti" Multiplicity="1" />
+    <End Role="comenzi" Type="Self.comenzi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clienti">
+        <PropertyRef Name="idClient" />
+      </Principal>
+      <Dependent Role="comenzi">
+        <PropertyRef Name="idClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_obiecteComanda_clienti">
+    <End Role="clienti" Type="Self.clienti" Multiplicity="1" />
+    <End Role="obiecteComanda" Type="Self.obiecteComanda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clienti">
+        <PropertyRef Name="idClient" />
+      </Principal>
+      <Dependent Role="obiecteComanda">
+        <PropertyRef Name="idClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_obiecteComanda_comenzi">
+    <End Role="comenzi" Type="Self.comenzi" Multiplicity="1" />
+    <End Role="obiecteComanda" Type="Self.obiecteComanda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comenzi">
+        <PropertyRef Name="idComanda" />
+      </Principal>
+      <Dependent Role="obiecteComanda">
+        <PropertyRef Name="idComanda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_obiecteComanda_produse">
+    <End Role="produse" Type="Self.produse" Multiplicity="1" />
+    <End Role="obiecteComanda" Type="Self.obiecteComanda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="produse">
+        <PropertyRef Name="idProdus" />
+      </Principal>
+      <Dependent Role="obiecteComanda">
+        <PropertyRef Name="idProdus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_produse_vanzatori">
+    <End Role="vanzatori" Type="Self.vanzatori" Multiplicity="1" />
+    <End Role="produse" Type="Self.produse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vanzatori">
+        <PropertyRef Name="idVanzator" />
+      </Principal>
+      <Dependent Role="produse">
+        <PropertyRef Name="idVanzator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="marketplace_fermieriModelStoreContainer">
+    <EntitySet Name="clienti" EntityType="Self.clienti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="comenzi" EntityType="Self.comenzi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="obiecteComanda" EntityType="Self.obiecteComanda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="produse" EntityType="Self.produse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vanzatori" EntityType="Self.vanzatori" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_comenzi_comenzi" Association="Self.FK_comenzi_comenzi">
+      <End Role="clienti" EntitySet="clienti" />
+      <End Role="comenzi" EntitySet="comenzi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_obiecteComanda_clienti" Association="Self.FK_obiecteComanda_clienti">
+      <End Role="clienti" EntitySet="clienti" />
+      <End Role="obiecteComanda" EntitySet="obiecteComanda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_obiecteComanda_comenzi" Association="Self.FK_obiecteComanda_comenzi">
+      <End Role="comenzi" EntitySet="comenzi" />
+      <End Role="obiecteComanda" EntitySet="obiecteComanda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_obiecteComanda_produse" Association="Self.FK_obiecteComanda_produse">
+      <End Role="produse" EntitySet="produse" />
+      <End Role="obiecteComanda" EntitySet="obiecteComanda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_produse_vanzatori" Association="Self.FK_produse_vanzatori">
+      <End Role="vanzatori" EntitySet="vanzatori" />
+      <End Role="produse" EntitySet="produse" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

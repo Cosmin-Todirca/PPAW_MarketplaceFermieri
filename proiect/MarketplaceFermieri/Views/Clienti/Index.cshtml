@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-align-center p-5">Alege clientul pe care il reprezinti din lista de mai jos</h2>
+
+
+<div class="container text-center">
+    <div class="row" v-for="(client, poz) of clienti" v-bind:key="client.idClient">
+        <div class="col">
+            <div class="width200px text-align-center">
+                <button type="button" class="btn btn-secondary width200px text-align-center" v-on:click="LocalStorageAddClient(client.idClient)">
+                    @Html.ActionLink("{{ client.numeClient }} {{ client.prenumeClient }}", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-secondary width200px text-align-center" data-bs-toggle="modal" data-bs-target="#editClient" v-on:click="GetClient(poz)">
+                Editeaza
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary width200px text-align-center" data-bs-toggle="modal" data-bs-target="#addClient">
+                Adauga un client
+            </button>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addClient" tabindex="-1" aria-labelledby="addClientLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Adaugă un client</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="NumeClientAdd" class="form-label">Nume</label>
+                    <input v-model="newClient.numeClient" type="text" class="form-control" id="NumeClientAdd">
+                </div>
+                <div class="mb-3">
+                    <label for="PrenumeClientAdd" class="form-label">Prenume</label>
+                    <input v-model="newClient.prenumeClient" type="text" class="form-control" id="PrenumeClientAdd">
+                </div>
+                <div class="mb-3">
+                    <label for="EmailClientAdd" class="form-label">Email</label>
+                    <input v-model="newClient.email" type="email" class="form-control" id="EmailClientAdd" aria-describedby="EmailClientAdd1">
+                    <div id="EmailClientAdd1" class="form-text">Yahoo, Gmail, etc.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="TelefonClientAdd" class="form-label">Telefon</label>
+                    <input v-model="newClient.numarTelefon" type="tel" class="form-control" id="TelefonClientAdd" aria-describedby="TelefonClientAdd1">
+                    <div id="TelefonClientAdd1" class="form-text">Fix sau mobil</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="AdaugaClient()">Adauga</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Inchide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editClient" tabindex="-1" aria-labelledby="editClientLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editează un client</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="NumeClientEdit" class="form-label">Nume</label>
+                    <input v-model="clientActualizat.numeClient" type="text" class="form-control" id="NumeClientEdit">
+                </div>
+                <div class="mb-3">
+                    <label for="PrenumeClientEdit" class="form-label">Prenume</label>
+                    <input v-model="clientActualizat.prenumeClient" type="text" class="form-control" id="PrenumeClientEdit">
+                </div>
+                <div class="mb-3">
+                    <label for="EmailClientEdit" class="form-label">Email</label>
+                    <input v-model="clientActualizat.email" type="email" class="form-control" id="EmailClientEdit" aria-describedby="EmailClientEdit1">
+                    <div id="EmailClientEdit1" class="form-text">Yahoo, Gmail, etc.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="TelefonClientEdit" class="form-label">Telefon</label>
+                    <input v-model="clientActualizat.numarTelefon" type="tel" class="form-control" id="TelefonClientEdit" aria-describedby="TelefonClientEdit1">
+                    <div id="TelefonClientEdit1" class="form-text">Fix sau mobil</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="EditeazaClient()">Salveaza</button>
+                <button type="button" class="btn btn-warning width200px text-align-center" data-bs-dismiss="modal" v-on:click="StergeClient()">Sterge un client</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Inchide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                clienti: [],
+                newClient: {
+                    numeClient: null,
+                    prenumeClient: null,
+                    email: null,
+                    numarTelefon: null
+                },
+                clientActualizat: {
+                    idClient: null,
+                    numeClient: null,
+                    prenumeClient: null,
+                    email: null,
+                    numarTelefon: null
+                },
+                indexClientSelectat:null,
+            },
+            methods: {
+                GetAllClienti: function () {
+                    this.$http.get('/api/Client/GetAll').then(
+                        function success(response) {
+                            this.clienti = response.body;
+                            console.log(response.body);//debug purposes
+                        }, function error(response) {
+                        });
+                },
+                AdaugaClient: function () {
+                    console.log("Adaug!");
+                    this.$http.post('api/Client/Add', this.newClient)
+                        .then(
+                            function success(response) {
+                                console.log(response);
+                                this.GetAllClienti();
+                            }, function error(response) {
+                                console.log("Eroare la adaugarea acestui client: ");
+                                console.log(this.newClient);
+                            }
+                        );
+                },
+                EditeazaClient: function () {
+                    console.log("Editez!");
+                    this.$http.put('api/Client/Put', this.clientActualizat)
+                        .then(
+                            function success(response) {
+                                console.log(response)
+                                this.clienti[this.indexClientSelectat].numeClient = this.clientActualizat.numeClient;
+                                this.clienti[this.indexClientSelectat].prenumeClient = this.clientActualizat.prenumeClient;
+                                this.clienti[this.indexClientSelectat].numarTelefon = this.clientActualizat.numarTelefon;
+                                this.clienti[this.indexClientSelectat].email = this.clientActualizat.email;
+                            }, function error(response) {
+                            }
+                        );
+                },
+                StergeClient: function () {
+                    console.log("Sterg!");
+                    this.$http.delete('api/Client/Delete?idClient='+ this.clientActualizat.idClient)
+                        .then(
+                            function success(response) {
+                                console.log(response)
+                                this.clienti.splice(this.indexClientSelectat, 1);
+                            }, function error(response) {
+                            }
+                        );
+
+                },
+                LocalStorageAddClient: function (id) {
+                    localStorage.setItem("userData", id);
+                },
+                GetClient: function (id) {
+                    console.log("Functia de preluat clientul de index: " + id)
+                    this.indexClientSelectat = id;
+                    this.clientActualizat.idClient = this.clienti[id].idClient;
+                    this.clientActualizat.numeClient = this.clienti[id].numeClient;
+                    this.clientActualizat.prenumeClient = this.clienti[id].prenumeClient;
+                    this.clientActualizat.numarTelefon = this.clienti[id].numarTelefon;
+                    this.clientActualizat.email = this.clienti[id].email;
+                }
+            },
+            created() {
+                this.GetAllClienti();
+            }
+
+        });
+    </script>
+}
+
+

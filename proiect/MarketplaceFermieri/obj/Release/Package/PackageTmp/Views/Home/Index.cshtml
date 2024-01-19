@@ -1,0 +1,107 @@
+﻿<h2 class="text-align-center p-5">Alege clientul pe care il reprezinti din lista de mai jos</h2>
+
+
+<div class="container text-center">
+    <div class="row" v-for="client of clienti" v-bind:key="client.idClient">
+        <div class="col">
+            <div class="width200px text-align-center">
+                <button type="button" class="btn btn-secondary width200px text-align-center" v-on:click="">
+                    @Html.ActionLink("{{ client.numeClient }} {{ client.prenumeClient }}", "Index", "Produse", new { area = "" }, new { @class = "nav-link" })
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-secondary width200px text-align-center" v-on:click="">
+                Editeaza
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary width200px text-align-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Adauga un client
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary" v-on:click="AdaugaClient()" >Adauga</button>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Inchide</button>
+                        <button type="button" class="btn btn-primary">Salveaza</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-warning width200px text-align-center" v-on:click="StergeClient()">
+                Sterge un client
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                clienti: [],
+            },
+            methods: {
+                GetAllClienti: function () {
+                    this.$http.get('/api/Client/GetAll').then(
+                        function success(response) {
+                            this.clienti = response.body;
+                            console.log(response.body);//debug purposes
+                        }, function error(response) {
+                        });
+                },
+                AdaugaClient: function() {
+                    console.log("Adaug!");
+                },
+                EditeazaClient: function() {
+                    console.log("Editez!");
+                },
+                StergeClient: function() {
+                    console.log("Sterg!");
+                }
+            },
+            created() {
+                this.GetAllClienti();
+            }
+
+        });
+    </script>
+}

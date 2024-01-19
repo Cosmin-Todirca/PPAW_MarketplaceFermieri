@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ViewModels.ReadProdusCuVanzatorViewModel>
+
+@{
+    ViewBag.Title = "IndexMVC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idProdus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numeProdus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descriereProdus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pret)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unitateDeMasura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantitate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imagine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idVanzator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vanzator.numeVanzator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vanzator.prenumeVanzator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vanzator.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vanzator.numarTelefon)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idProdus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numeProdus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descriereProdus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pret)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unitateDeMasura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imagine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idVanzator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vanzator.numeVanzator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vanzator.prenumeVanzator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vanzator.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vanzator.numarTelefon)
+            </td>
+        </tr>
+    }
+
+</table>

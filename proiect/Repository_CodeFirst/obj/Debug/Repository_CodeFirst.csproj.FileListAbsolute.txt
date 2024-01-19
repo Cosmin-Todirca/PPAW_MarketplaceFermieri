@@ -1,0 +1,15 @@
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\bin\Debug\Repository_CodeFirst.dll.config
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\bin\Debug\Repository_CodeFirst.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\bin\Debug\Repository_CodeFirst.pdb
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\bin\Debug\EntityFramework.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\bin\Debug\EntityFramework.SqlServer.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\bin\Debug\EntityFramework.xml
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\bin\Debug\EntityFramework.SqlServer.xml
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\obj\Debug\Repository_CodeFirst.csproj.AssemblyReference.cache
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\obj\Debug\Repository_CodeFirst.Migrations.primaIncercare.resources
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\obj\Debug\Repository_CodeFirst.Migrations.insertData.resources
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\obj\Debug\Repository_CodeFirst.csproj.GenerateResource.cache
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\obj\Debug\Repository_CodeFirst.csproj.CoreCompileInputs.cache
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\obj\Debug\Repository_CodeFirst.csproj.CopyComplete
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\obj\Debug\Repository_CodeFirst.dll
+D:\Masterat\An1Semestrul1\PPAW\Laborator\Proiect\Repository_CodeFirst\obj\Debug\Repository_CodeFirst.pdb

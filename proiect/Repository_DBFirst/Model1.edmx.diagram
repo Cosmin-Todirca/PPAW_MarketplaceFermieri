@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8bd502f7b7e549758b161c81a293b602" Name="Diagram1">
+        <EntityTypeShape EntityType="marketplace_fermieriModel.clienti" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplace_fermieriModel.comenzi" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplace_fermieriModel.obiecteComanda" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplace_fermieriModel.produse" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplace_fermieriModel.vanzatori" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="marketplace_fermieriModel.FK_comenzi_comenzi" ManuallyRouted="false" />
+        <AssociationConnector Association="marketplace_fermieriModel.FK_obiecteComanda_clienti" ManuallyRouted="false" />
+        <AssociationConnector Association="marketplace_fermieriModel.FK_obiecteComanda_comenzi" ManuallyRouted="false" />
+        <AssociationConnector Association="marketplace_fermieriModel.FK_obiecteComanda_produse" ManuallyRouted="false" />
+        <AssociationConnector Association="marketplace_fermieriModel.FK_produse_vanzatori" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

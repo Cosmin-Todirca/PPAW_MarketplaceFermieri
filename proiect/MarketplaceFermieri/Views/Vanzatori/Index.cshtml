@@ -1,0 +1,42 @@
+﻿<h2>Lista cu toti vanzatorii</h2>
+
+
+@section scripts{
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                vanzatorId: null,
+                vanzator: null,
+                vanzatori: []
+            },
+            methods: {
+                GetVanzatorId: function () {
+                    this.vanzatorId = new URL(location.href).searchParams.get('id');
+                },
+                GetVanzatorDupaId: function (id) {
+                    this.$http.get('/api/Vanzator/Get?idVanzator=' + id).then(
+                        function success(response) {
+                            this.vanzator = response.body;
+                            console.log(response.body);//debug purposes
+                        }, function error(response) {
+                        });
+                },
+                GetVanzatori: function () {
+                    this.$http.get('/api/Vanzator/GetAll').then(
+                        function success(response) {
+                            this.vanzatori = response.body;
+                            console.log(response.body);//debug purposes
+                        }, function error(response) {
+                        });
+                }
+               
+            },
+            created() {
+                this.GetVanzatorDupaId(1);
+                this.GetVanzatori();
+            }
+        })
+    </script>
+}
+

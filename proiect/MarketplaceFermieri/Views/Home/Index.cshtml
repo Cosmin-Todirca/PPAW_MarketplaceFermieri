@@ -1,0 +1,84 @@
+﻿<h2 class="text-align-center p-5">Bine ai venit la taraba noastra, {{client.prenumeClient}}</h2>
+
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/Static/womanfarmer.jpg" alt="Fermieri">
+                <div class="card-body">
+                    <p class="card-text"> Vanzatori... Sectiunea asta se va dezvolta curand pentru tine!</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/Static/fruits.jpg" alt="Produse">
+                <div class="card-body">
+                    <p class="card-text"> Gaseste produsele tale favorite!</p>
+                    <a href="/Produse" class="card-link">Doresc produse!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/Static/orders.jpg" alt="Istoric comenzi">
+                <div class="card-body">
+                    <p class="card-text"> Aici poti gasi toate comenzile tale! Sectiune in constructie</p>
+                </div>
+            </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/Static/settings.jpg" alt="Setari">
+                <div class="card-body">
+                    <p class="card-text"> Setarile profilului tau! Sectiune in constructie</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                client: {
+                    idClient: null,
+                    numeClient: null,
+                    prenumeClient: null
+                },
+                idClientSelectat: -1,
+
+            },
+            methods: {
+                GetAllClienti: function () {
+                    this.$http.get('/api/Client/Get/?idClient='+this.idClientSelectat).then(
+                        function success(response) {
+                            this.client = response.body;
+                            console.log(response.body);//debug purposes
+                        }, function error(response) {
+                        });
+                },
+                LocalStorageGetClient: function () {
+                    this.idClientSelectat = localStorage.getItem("userData");
+                    console.log(this.idClientSelectat);
+                    this.GetAllClienti();
+                }
+            },
+            created() {
+                this.LocalStorageGetClient();
+            }
+
+        });
+    </script>
+}

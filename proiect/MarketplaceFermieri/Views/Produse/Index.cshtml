@@ -1,0 +1,38 @@
+﻿<h2>Lista cu toate produsele</h2>
+<h2>{{idClientSelectat}}</h2>
+
+
+
+
+@section scripts{
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                produseCuVanzatori:[],
+                idClientSelectat: -1,
+
+            },
+            methods: {
+                GetAllProduse: function () {
+                    this.$http.get('api/Produs/GetAllCard').then(
+                        function success(response) {
+                            this.produseCuVanzatori = response.body;
+                            console.log(response.body);//debug purposes
+                        }, function error(response) {
+                        });
+                },
+                LocalStorageGetClient: function () {
+                    this.idClientSelectat = localStorage.getItem("userData");
+                    console.log(this.idClientSelectat);
+                }
+            },
+            created() {
+                this.LocalStorageGetClient();
+                this.GetAllProduse();
+            }
+
+        });
+    </script>
+}
