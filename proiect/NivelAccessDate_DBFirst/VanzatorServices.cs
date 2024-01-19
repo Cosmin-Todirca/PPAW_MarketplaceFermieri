@@ -50,7 +50,7 @@ namespace BusinessLayer_DBFirst
 
         public List<ReadVanzatorViewModel> Get()
         {
-            List<vanzatori> vnztri = (List<vanzatori>)_VanzatoriServices.GetAllQuerable().Where(x=> x.logicalDelete==false).ToList();
+            List<vanzatori> vnztri = (List<vanzatori>)_VanzatoriServices.GetAllQuerable().Where(x => x.logicalDelete == false).ToList();
 
             if (vnztri == null)
             {
@@ -97,7 +97,7 @@ namespace BusinessLayer_DBFirst
 
         public ReadVanzatorCardViewModel GetCard(int Id)
         {
-            vanzatori vanzator = _VanzatoriServices.GetAllQuerable().Where(x=> x.idVanzator == Id && x.logicalDelete==false).First();
+            vanzatori vanzator = _VanzatoriServices.GetAllQuerable().Where(x => x.idVanzator == Id && x.logicalDelete == false).First();
 
             if (vanzator == null)
             {
@@ -121,7 +121,7 @@ namespace BusinessLayer_DBFirst
         }
         public List<ReadVanzatorCardViewModel> GetAllCard()
         {
-            List<vanzatori> vnztri = (List<vanzatori>)_VanzatoriServices.GetAllQuerable().Where(x=> x.logicalDelete == false).ToList();
+            List<vanzatori> vnztri = (List<vanzatori>)_VanzatoriServices.GetAllQuerable().Where(x => x.logicalDelete == false).ToList();
 
             if (vnztri == null)
             {
@@ -174,7 +174,7 @@ namespace BusinessLayer_DBFirst
             }
             vanzatorToBeDeleted.logicalDelete = true;
 
-            _VanzatoriServices.Update(vanzatorToBeDeleted,id);
+            _VanzatoriServices.Update(vanzatorToBeDeleted, id);
         }
 
         public List<ReadVanzatorViewModel> GetAll()

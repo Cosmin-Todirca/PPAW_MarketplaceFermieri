@@ -1,0 +1,2 @@
+2024-01-19 19:23:14.0367|ERROR|Exceptions.EntryNotFoundException|TestLog :)
+2024-01-19 19:46:52.3996|ERROR|Exceptions.EntityValidationException|Eroare la adaugarea clientului

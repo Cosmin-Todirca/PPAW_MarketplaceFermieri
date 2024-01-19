@@ -4,6 +4,7 @@ using Exceptions;
 using NivelAccessDate_DBFirst;
 using NivelAccessDate_DBFirst.Interfaces;
 using Repository_DBFirst;
+using System;
 using System.Collections.Generic;
 using ViewModels;
 
@@ -25,21 +26,28 @@ namespace BusinessLayer_DBFirst
         {
             _db = (marketplace_fermieriEntities)db;
             _ClientiServices = new ClientiAccesor(_db);
-            this.cacheManager=cacheManager;
+            this.cacheManager = cacheManager;
         }
 
         public void Add(CreateClientViewModel newClient)
         {
-            clienti client = new clienti()
+            try
             {
-                numeClient = newClient.numeClient,
-                prenumeClient = newClient.prenumeClient,
-                email = newClient.email,
-                numarTelefon = newClient.numarTelefon
-            };
+                clienti client = new clienti()
+                {
+                    numeClient = newClient.numeClient,
+                    prenumeClient = newClient.prenumeClient,
+                    email = newClient.email,
+                    numarTelefon = newClient.numarTelefon
+                };
 
-            _ClientiServices.Add(client);
-            cacheManager.Remove("clienti");
+                _ClientiServices.Add(client);
+                cacheManager.Remove("clienti");
+            }
+            catch(Exception e)
+            {
+                throw new EntityValidationException("Eroare la adaugarea clientului");
+            }
         }
 
         public List<ReadClientViewModel> Get()
@@ -85,7 +93,7 @@ namespace BusinessLayer_DBFirst
             else
             {
                 client = _ClientiServices.Get(Id);
-                cacheManager.Set("client_"+Id, client);
+                cacheManager.Set("client_" + Id, client);
 
             }
             if (client == null)
