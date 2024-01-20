@@ -44,6 +44,29 @@ namespace MarketplaceFermieri.Controllers
             }
         }
 
+        [Route("api/ObiectComanda/AddToCart")]
+        [HttpPost]
+        public IHttpActionResult AddToCart(CreateObiectComandaDTO newObiectComanda)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    obiectComandaServices.AddToCart(newObiectComanda);
+                    return Ok("Obiectul unei comenzi adaugat cu succes");
+                }
+                else
+                {
+                    return BadRequest("Eroare la adaugarea obiectului unei comenzi");
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Exceptie la adaugarea obiectului unei comenzi" + e.Message);
+
+            }
+        }
+
         [Route("api/ObiectComanda/Get")]
         [HttpGet]
         public IHttpActionResult Read(int idObiectComanda)

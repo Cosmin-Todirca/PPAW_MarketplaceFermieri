@@ -16,7 +16,7 @@
                 <input type="text" v-model.number="numarObiecteComanda[index]" class="w-50" />
                 <button type="button" class="btn btn-light" v-on:click="AdaugaProdus(index)">+</button>
             </div>
-            <button type="button" class="btn btn-primary">🛒</button>
+            <button type="button" class="btn btn-primary" v-bind:disabled="numarObiecteComanda[index] <= 0" v-on:click="InregistreazaProdus(index)">🛒</button>
 
         </div>
     </div>
@@ -50,8 +50,23 @@
             el: '#app',
             data: {
                 produseCuVanzatori: [],
-                numarObiecteComanda:[],
+                numarObiecteComanda: [],
                 idClientSelectat: -1,
+                comanda: {
+                    idComanda: null,
+                    idClient: null,
+                    dataComanda: null,
+                    situatieComanda: null,
+                    total: null
+                },
+                obiectComanda: {
+                    idComanda: null,
+                    idProdus: null,
+                    idClient: null,
+                    situatiePlata: null,
+                    cantitateComanda: null
+                },
+                plata: "Cash",
 
             },
             methods: {
@@ -87,14 +102,39 @@
                     this.numarObiecteComanda = [...this.numarObiecteComanda]; //spread operator
                     this.numarObiecteComanda[index]--;
                 },
+                InregistreazaProdus: function (index) {
+                    this.obiectComanda.idComanda = this.comanda.idComanda;
+                    this.obiectComanda.idProdus = this.produseCuVanzatori[index].idProdus;
+                    this.obiectComanda.idClient = this.idClientSelectat;
+                    this.obiectComanda.situatiePlata = this.plata;
+                    this.obiectComanda.cantitateComanda = this.numarObiecteComanda[index];
+                    
+                    this.$http.post('api/ObiectComanda/AddToCart', this.obiectComanda).then(
+                        function success(response) {
+                            console.log(response.body);//debug purposes
+                            this.numarObiecteComanda = [...this.numarObiecteComanda]; //spread operator
+                            this.numarObiecteComanda[index] = 0;
+                            console.log("Produs Inregistrat!");
+                        }, function error(response) {
+                    });
+                },
                 LocalStorageGetClient: function () {
                     this.idClientSelectat = localStorage.getItem("userData");
                     console.log(this.idClientSelectat);
-                }
+                },
+                GetComanda: function () {
+                    this.$http.get('api/Comanda/GetNewOrder?idClient=' + this.idClientSelectat).then(
+                        function success(response) {
+                            this.comanda = response.body;
+                            console.log(response.body);//debug purposes
+                        }, function error(response) {
+                        });
+                },
             },
             created() {
                 this.LocalStorageGetClient();
                 this.GetAllProduse();
+                this.GetComanda();
             }
 
         });

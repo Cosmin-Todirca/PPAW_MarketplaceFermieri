@@ -5,6 +5,7 @@ using DTOs;
 using Exceptions;
 using Repository_DBFirst;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLayer_DBFirst
 {
@@ -30,7 +31,7 @@ namespace BusinessLayer_DBFirst
             comenzi comanda = new comenzi()
             {
                 idClient = newComanda.idClient,
-                //dataComanda = newComanda.dataComanda,//fiindca iau mereu data sistemului.
+                dataComanda = System.DateTime.Now,
                 situatieComanda = newComanda.situatieComanda,
                 total = newComanda.total
             };
@@ -82,7 +83,42 @@ namespace BusinessLayer_DBFirst
             };
             return readComandaViewModel;
         }
-        public void Update(UpdateComandaDTO updatedComanda)
+
+        public ReadComandaDTO ReadNewOrder(int idClient)
+        {
+            comenzi comandaNoua = _ComenziServices.GetAllQuerable().Where(x => x.situatieComanda == "Nou" && x.idClient == idClient).FirstOrDefault();
+            if (comandaNoua == null)
+            {
+                comenzi comanda = new comenzi()
+                {
+                    idClient = idClient,
+                    dataComanda = System.DateTime.Now,
+                    situatieComanda = "Nou",
+                    total = 0
+                };
+
+                _ComenziServices.Add(comanda);
+                comandaNoua = _ComenziServices.GetAllQuerable().Where(x => x.situatieComanda == "Nou" && x.idClient == idClient).FirstOrDefault();
+                if (comandaNoua == null)
+                {
+                    throw new EntryNotFoundException("Eroare la preluarea unei comenzi noi.");
+                }
+            }
+            
+            ReadComandaDTO readComandaDTO = new ReadComandaDTO()
+            {
+                idComanda = comandaNoua.idComanda,
+                idClient = comandaNoua.idClient,
+                dataComanda = comandaNoua.dataComanda,
+                situatieComanda = comandaNoua.situatieComanda,
+                total = comandaNoua.total
+            };
+            return readComandaDTO;
+
+
+        }
+
+            public void Update(UpdateComandaDTO updatedComanda)
         {
             comenzi comandaToBeUpdated = _ComenziServices.Get(updatedComanda.idClient);
 

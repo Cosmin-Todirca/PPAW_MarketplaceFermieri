@@ -80,6 +80,26 @@ namespace MarketplaceFermieri.Controllers
             }
         }
 
+        [Route("api/Comanda/GetNewOrder")]
+        [HttpGet]
+        public IHttpActionResult ReadNewOrder(int idClient)
+        {
+            try
+            {
+                ReadComandaDTO readComandaDTO = comandaServices.ReadNewOrder(idClient);
+                return Ok(readComandaDTO);
+            }
+            catch (EntryNotFoundException e)
+            {
+                return BadRequest("Id inexistent" + e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Exceptie la citirea comenzii" + e.Message);
+            }
+        }
+
+
         [Route("api/Comanda/Put")]
         [HttpPut]
         public IHttpActionResult Update(UpdateComandaDTO comandaActualizata)

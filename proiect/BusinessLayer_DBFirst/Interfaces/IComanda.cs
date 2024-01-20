@@ -8,6 +8,7 @@ namespace BusinessLayer_DBFirst.Interfaces
         void Add(CreateComandaDTO newComanda);
         List<ReadComandaDTO> Get();
         ReadComandaDTO Get(int Id);
+        ReadComandaDTO ReadNewOrder(int idClient);
         void Update(UpdateComandaDTO updatedComanda);
         void Delete(int id);
     }

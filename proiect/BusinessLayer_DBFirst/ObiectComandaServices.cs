@@ -39,6 +39,28 @@ namespace BusinessLayer_DBFirst
             _ObiecteComandaServices.Add(obiectComanda);
         }
 
+        public void AddToCart(CreateObiectComandaDTO newObiectComanda) //BUSINESSLOGIC
+        {
+            obiecteComanda obiectComanda = new obiecteComanda()
+            {
+                idComanda = newObiectComanda.idComanda,
+                idProdus = newObiectComanda.idProdus,
+                idClient = newObiectComanda.idClient,
+                situatiePlata = newObiectComanda.situatiePlata,
+                cantitateComanda = newObiectComanda.cantitateComanda
+            };
+            obiecteComanda obtComanda = _ObiecteComandaServices.Get(obiectComanda.idComanda);
+            if (obtComanda == null)
+            {
+                _ObiecteComandaServices.Add(obiectComanda);
+            }
+            else
+            {
+                obiectComanda.cantitateComanda += obtComanda.cantitateComanda;
+                _ObiecteComandaServices.Update(obiectComanda, obiectComanda.idClient);
+            }
+        }
+
         public List<ReadObiectComandaDTO> Get()
         {
             List<obiecteComanda> bctCmnda = (List<obiecteComanda>)_ObiecteComandaServices.GetAll();
