@@ -12,7 +12,7 @@ namespace DTOs
 
         public bool logicalDelete { get; set; }
     }
-    public class CreateVanzatorViewModel
+    public class CreateVanzatorDTO
     {
         [Required(ErrorMessage = "Name is required")]
         [StringLength(100)]
@@ -30,7 +30,7 @@ namespace DTOs
         public bool logicalDelete { get; set; }
     }
 
-    public class ReadVanzatorViewModel
+    public class ReadVanzatorDTO
     {
         public int idVanzator { get; set; }
         public string numeVanzator { get; set; }
@@ -43,14 +43,14 @@ namespace DTOs
 
     //https://dotnettutorials.net/lesson/automapper-in-c-sharp/
 
-    public class ReadVanzatorCardViewModel
+    public class ReadVanzatorCardDTO
     {
         public int idVanzator { get; set; }
         public string numeVanzator { get; set; }
         public string prenumeVanzator { get; set; }
     }
 
-    public class UpdateVanzatorViewModel
+    public class UpdateVanzatorDTO
     {
         [Required(ErrorMessage = "ID is required")]
         [RegularExpression("([1-9][0-9]*)")]

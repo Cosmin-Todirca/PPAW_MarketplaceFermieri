@@ -21,7 +21,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/Vanzator/Add")]
         [HttpPost]
-        public IHttpActionResult Add(CreateVanzatorViewModel newVanzator)
+        public IHttpActionResult Add(CreateVanzatorDTO newVanzator)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadVanzatorViewModel readVanzatorViewModel = vanzatorServices.Get(idVanzator);
+                ReadVanzatorDTO readVanzatorViewModel = vanzatorServices.Get(idVanzator);
                 return Ok(readVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -67,7 +67,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadVanzatorCardViewModel readVanzatorViewModel = vanzatorServices.GetCard(idVanzator);
+                ReadVanzatorCardDTO readVanzatorViewModel = vanzatorServices.GetCard(idVanzator);
                 return Ok(readVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -86,7 +86,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadVanzatorViewModel> readVanzatorViewModel = vanzatorServices.Get();
+                List<ReadVanzatorDTO> readVanzatorViewModel = vanzatorServices.Get();
                 return Ok(readVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -105,7 +105,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadVanzatorCardViewModel> readVanzatorViewModel = vanzatorServices.GetAllCard();
+                List<ReadVanzatorCardDTO> readVanzatorViewModel = vanzatorServices.GetAllCard();
                 return Ok(readVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -120,7 +120,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/Vanzator/Put")]
         [HttpPut]
-        public IHttpActionResult Update(UpdateVanzatorViewModel vanzatorActualizat)
+        public IHttpActionResult Update(UpdateVanzatorDTO vanzatorActualizat)
         {
             try
             {

@@ -25,7 +25,7 @@ namespace BusinessLayer_DBFirst
             _ComenziServices = new ComenziAccesor(_db);
         }
 
-        public void Add(CreateComandaViewModel newComanda)
+        public void Add(CreateComandaDTO newComanda)
         {
             comenzi comanda = new comenzi()
             {
@@ -38,7 +38,7 @@ namespace BusinessLayer_DBFirst
             _ComenziServices.Add(comanda);
         }
 
-        public List<ReadComandaViewModel> Get()
+        public List<ReadComandaDTO> Get()
         {
             List<comenzi> cmnzi = (List<comenzi>)_ComenziServices.GetAll();
 
@@ -47,10 +47,10 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            List<ReadComandaViewModel> readComenzi = new List<ReadComandaViewModel>();
+            List<ReadComandaDTO> readComenzi = new List<ReadComandaDTO>();
             foreach (comenzi cmnd in cmnzi) //not such a great implement, but enough for the moment
             {
-                readComenzi.Add(new ReadComandaViewModel()
+                readComenzi.Add(new ReadComandaDTO()
                 {
                     idComanda = cmnd.idComanda,
                     idClient = cmnd.idClient,
@@ -63,7 +63,7 @@ namespace BusinessLayer_DBFirst
             return readComenzi;
         }
 
-        public ReadComandaViewModel Get(int Id)
+        public ReadComandaDTO Get(int Id)
         {
             comenzi comanda = _ComenziServices.Get(Id);
 
@@ -72,7 +72,7 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            ReadComandaViewModel readComandaViewModel = new ReadComandaViewModel()
+            ReadComandaDTO readComandaViewModel = new ReadComandaDTO()
             {
                 idComanda = comanda.idComanda,
                 idClient = comanda.idClient,
@@ -82,7 +82,7 @@ namespace BusinessLayer_DBFirst
             };
             return readComandaViewModel;
         }
-        public void Update(UpdateComandaViewModel updatedComanda)
+        public void Update(UpdateComandaDTO updatedComanda)
         {
             comenzi comandaToBeUpdated = _ComenziServices.Get(updatedComanda.idClient);
 

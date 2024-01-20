@@ -25,7 +25,7 @@ namespace BusinessLayer_DBFirst
             _ObiecteComandaServices = new ObiecteComandaAccesor(_db);
         }
 
-        public void Add(CreateObiectComandaViewModel newObiectComanda)
+        public void Add(CreateObiectComandaDTO newObiectComanda)
         {
             obiecteComanda obiectComanda = new obiecteComanda()
             {
@@ -39,7 +39,7 @@ namespace BusinessLayer_DBFirst
             _ObiecteComandaServices.Add(obiectComanda);
         }
 
-        public List<ReadObiectComandaViewModel> Get()
+        public List<ReadObiectComandaDTO> Get()
         {
             List<obiecteComanda> bctCmnda = (List<obiecteComanda>)_ObiecteComandaServices.GetAll();
 
@@ -48,10 +48,10 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            List<ReadObiectComandaViewModel> readObiecteComanda = new List<ReadObiectComandaViewModel>();
+            List<ReadObiectComandaDTO> readObiecteComanda = new List<ReadObiectComandaDTO>();
             foreach (obiecteComanda bctCmnd in bctCmnda) //not such a great implement, but enough for the moment
             {
-                readObiecteComanda.Add(new ReadObiectComandaViewModel()
+                readObiecteComanda.Add(new ReadObiectComandaDTO()
                 {
                     idObiectComanda = bctCmnd.idObiectComanda,
                     idComanda = bctCmnd.idComanda,
@@ -64,7 +64,7 @@ namespace BusinessLayer_DBFirst
             return readObiecteComanda;
         }
 
-        public ReadObiectComandaViewModel Get(int Id)
+        public ReadObiectComandaDTO Get(int Id)
         {
             obiecteComanda obiectComanda = _ObiecteComandaServices.Get(Id);
 
@@ -73,7 +73,7 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            ReadObiectComandaViewModel readObiectComandaViewModel = new ReadObiectComandaViewModel()
+            ReadObiectComandaDTO readObiectComandaViewModel = new ReadObiectComandaDTO()
             {
                 idObiectComanda = obiectComanda.idObiectComanda,
                 idComanda = obiectComanda.idComanda,
@@ -84,7 +84,7 @@ namespace BusinessLayer_DBFirst
             };
             return readObiectComandaViewModel;
         }
-        public void Update(UpdateObiectComandaViewModel updatedObiectComanda)
+        public void Update(UpdateObiectComandaDTO updatedObiectComanda)
         {
             obiecteComanda obiectComandaToBeUpdated = _ObiecteComandaServices.Get(updatedObiectComanda.idClient);
 

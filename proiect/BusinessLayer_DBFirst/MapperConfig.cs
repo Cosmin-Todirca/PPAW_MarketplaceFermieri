@@ -12,7 +12,7 @@ namespace BusinessLayer_DBFirst
             var config = new MapperConfiguration(cfg =>
             {
                 // Configuring Source and Destination
-                cfg.CreateMap<vanzatori, ReadVanzatorCardViewModel>();
+                cfg.CreateMap<vanzatori, ReadVanzatorCardDTO>();
                 // Any Other Mapping Configuration ....
             });
             return config;

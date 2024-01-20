@@ -17,7 +17,7 @@ namespace DTOs
         public string imagine { get; set; }
     }
 
-    public class CreateProdusViewModel
+    public class CreateProdusDTO
     {
         [Required(ErrorMessage = "ID is required")]
         [RegularExpression("([1-9][0-9]*)")]
@@ -42,7 +42,7 @@ namespace DTOs
         public string imagine { get; set; }
     }
 
-    public class ReadProdusViewModel
+    public class ReadProdusDTO
     {
         public int idProdus { get; set; }
         public int idVanzator { get; set; }
@@ -54,7 +54,7 @@ namespace DTOs
         public string imagine { get; set; }
     }
 
-    public class UpdateProdusViewModel
+    public class UpdateProdusDTO
     {
         [Required(ErrorMessage = "ID is required")]
         [RegularExpression("([1-9][0-9]*)")]
@@ -82,7 +82,7 @@ namespace DTOs
         public string imagine { get; set; }
     }
 
-    public class ReadProdusCuVanzatorViewModel
+    public class ReadProdusCuVanzatorDTO
     {
         public int idProdus { get; set; }
         public int idVanzator { get; set; }
@@ -92,10 +92,10 @@ namespace DTOs
         public string unitateDeMasura { get; set; }
         public decimal cantitate { get; set; }
         public string imagine { get; set; }
-        public ReadVanzatorViewModel vanzator { get; set; }
+        public ReadVanzatorDTO vanzator { get; set; }
     }
 
-    public class CreateProdusViewModelCuDropdown
+    public class CreateProdusCuDropdownDTO
     {
         [Required(ErrorMessage = "ID is required")]
         [RegularExpression("([1-9][0-9]*)")]

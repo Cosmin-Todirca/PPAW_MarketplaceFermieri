@@ -28,7 +28,7 @@ namespace BusinessLayer_DBFirst
             this.cacheManager = cacheManager;
         }
 
-        public void Add(CreateClientViewModel newClient)
+        public void Add(CreateClientDTO newClient)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace BusinessLayer_DBFirst
             }
         }
 
-        public List<ReadClientViewModel> Get()
+        public List<ReadClientDTO> Get()
         {
             List<clienti> clnti;
             if (cacheManager.IsSet("clienti"))
@@ -66,10 +66,10 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            List<ReadClientViewModel> readClienti = new List<ReadClientViewModel>();
+            List<ReadClientDTO> readClienti = new List<ReadClientDTO>();
             foreach (clienti clnt in clnti) //not such a great implement, but enough for the moment
             {
-                readClienti.Add(new ReadClientViewModel()
+                readClienti.Add(new ReadClientDTO()
                 {
                     idClient = clnt.idClient,
                     numeClient = clnt.numeClient,
@@ -82,7 +82,7 @@ namespace BusinessLayer_DBFirst
             return readClienti;
         }
 
-        public ReadClientViewModel Get(int Id)
+        public ReadClientDTO Get(int Id)
         {
             clienti client;
             if (cacheManager.IsSet("client_" + Id))
@@ -100,7 +100,7 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            ReadClientViewModel readClientViewModel = new ReadClientViewModel()
+            ReadClientDTO readClientViewModel = new ReadClientDTO()
             {
                 idClient = client.idClient,
                 numeClient = client.numeClient,
@@ -110,7 +110,7 @@ namespace BusinessLayer_DBFirst
             };
             return readClientViewModel;
         }
-        public void Update(UpdateClientViewModel updatedClient)
+        public void Update(UpdateClientDTO updatedClient)
         {
             clienti clientToBeUpdated = _ClientiServices.Get(updatedClient.idClient);
 

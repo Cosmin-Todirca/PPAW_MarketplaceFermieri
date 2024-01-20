@@ -29,7 +29,7 @@ namespace MarketplaceFermieri.Controllers
         // GET: Vanzatori
         public ActionResult IndexMVC()
         {
-            IEnumerable<ReadVanzatorViewModel> vanzatoriViewModel = new List<ReadVanzatorViewModel>();
+            IEnumerable<ReadVanzatorDTO> vanzatoriViewModel = new List<ReadVanzatorDTO>();
             vanzatoriViewModel = new VanzatorServices(_db).GetAll();
             return View(vanzatoriViewModel);
         }
@@ -41,12 +41,12 @@ namespace MarketplaceFermieri.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ReadVanzatorViewModel v1 = new VanzatorServices(_db).Get((int)id);
+            ReadVanzatorDTO v1 = new VanzatorServices(_db).Get((int)id);
             return View(v1);
         }
         public ActionResult CreateMVC()
         {
-            CreateVanzatorViewModel model = new CreateVanzatorViewModel();
+            CreateVanzatorDTO model = new CreateVanzatorDTO();
 
             return View(model);
         }
@@ -56,7 +56,7 @@ namespace MarketplaceFermieri.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateMVC(CreateVanzatorViewModel vanzatorViewModel)
+        public ActionResult CreateMVC(CreateVanzatorDTO vanzatorViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ReadVanzatorViewModel v1 = new VanzatorServices(_db).Get((int)id);
+            ReadVanzatorDTO v1 = new VanzatorServices(_db).Get((int)id);
             if (v1 == null)
             {
                 return HttpNotFound();
@@ -87,7 +87,7 @@ namespace MarketplaceFermieri.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMVC([Bind(Include = "idVanzator,numeVanzator,prenumeVanzator,email,numarTelefon")] UpdateVanzatorViewModel vanzatorViewModel)
+        public ActionResult EditMVC([Bind(Include = "idVanzator,numeVanzator,prenumeVanzator,email,numarTelefon")] UpdateVanzatorDTO vanzatorViewModel)
         {
             if (ModelState.IsValid)
             {

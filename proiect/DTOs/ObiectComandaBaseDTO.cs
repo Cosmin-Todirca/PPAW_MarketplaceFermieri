@@ -12,7 +12,7 @@ namespace DTOs
         public decimal cantitateComanda { get; set; }
     }
 
-    public class CreateObiectComandaViewModel
+    public class CreateObiectComandaDTO
     {
         [Required(ErrorMessage = "ID is required")]
         [RegularExpression("([1-9][0-9]*)")]
@@ -30,7 +30,7 @@ namespace DTOs
         [Range(0, 10000, ErrorMessage = "Quantity must be between 0 and 10000 units")]
         public decimal cantitateComanda { get; set; }
     }
-    public class ReadObiectComandaViewModel
+    public class ReadObiectComandaDTO
     {
         public int idObiectComanda { get; set; }
         public int idComanda { get; set; }
@@ -39,7 +39,7 @@ namespace DTOs
         public string situatiePlata { get; set; }
         public decimal cantitateComanda { get; set; }
     }
-    public class UpdateObiectComandaViewModel
+    public class UpdateObiectComandaDTO
     {
         [Required(ErrorMessage = "ID is required")]
         [RegularExpression("([1-9][0-9]*)")]

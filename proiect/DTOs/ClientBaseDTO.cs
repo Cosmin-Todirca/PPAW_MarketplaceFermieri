@@ -12,7 +12,7 @@ namespace DTOs
     }
 
 
-    public class CreateClientViewModel
+    public class CreateClientDTO
     {
         [Required(ErrorMessage = "Name is required")]
         [StringLength(100)]
@@ -27,7 +27,7 @@ namespace DTOs
         [StringLength(11)]
         public string numarTelefon { get; set; }
     }
-    public class ReadClientViewModel
+    public class ReadClientDTO
     {
         public int idClient { get; set; }
         public string numeClient { get; set; }
@@ -36,7 +36,7 @@ namespace DTOs
         public string numarTelefon { get; set; }
     }
 
-    public class UpdateClientViewModel
+    public class UpdateClientDTO
     {
         [Required(ErrorMessage = "ID is required")]
         [RegularExpression("([1-9][0-9]*)")]

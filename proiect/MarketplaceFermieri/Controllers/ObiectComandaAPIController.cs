@@ -23,7 +23,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/ObiectComanda/Add")]
         [HttpPost]
-        public IHttpActionResult Add(CreateObiectComandaViewModel newObiectComanda)
+        public IHttpActionResult Add(CreateObiectComandaDTO newObiectComanda)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadObiectComandaViewModel readObiectComandaViewModel = obiectComandaServices.Get(idObiectComanda);
+                ReadObiectComandaDTO readObiectComandaViewModel = obiectComandaServices.Get(idObiectComanda);
                 return Ok(readObiectComandaViewModel);
             }
             catch (EntryNotFoundException e)
@@ -69,7 +69,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadObiectComandaViewModel> readObiectComandaViewModel = obiectComandaServices.Get();
+                List<ReadObiectComandaDTO> readObiectComandaViewModel = obiectComandaServices.Get();
                 return Ok(readObiectComandaViewModel);
             }
             catch (EntryNotFoundException e)
@@ -84,7 +84,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/ObiectComanda/Put")]
         [HttpPut]
-        public IHttpActionResult Update(UpdateObiectComandaViewModel obiectComandaActualizat)
+        public IHttpActionResult Update(UpdateObiectComandaDTO obiectComandaActualizat)
         {
             try
             {

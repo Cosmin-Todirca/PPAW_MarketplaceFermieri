@@ -32,7 +32,7 @@ namespace BusinessLayer_DBFirst
             _VanzatoriServices = new VanzatoriAccesor(_db);
         }
 
-        public void Add(CreateProdusViewModel newProdus)
+        public void Add(CreateProdusDTO newProdus)
         {
             produse produs = new produse()
             {
@@ -55,7 +55,7 @@ namespace BusinessLayer_DBFirst
             }
         }
 
-        public List<ReadProdusViewModel> Get()
+        public List<ReadProdusDTO> Get()
         {
             List<produse> prdse = (List<produse>)_ProduseServices.GetAll();
 
@@ -64,10 +64,10 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            List<ReadProdusViewModel> readProduse = new List<ReadProdusViewModel>();
+            List<ReadProdusDTO> readProduse = new List<ReadProdusDTO>();
             foreach (produse prd in prdse) //not such a great implement, but enough for the moment
             {
-                readProduse.Add(new ReadProdusViewModel()
+                readProduse.Add(new ReadProdusDTO()
                 {
                     idProdus = prd.idProdus,
                     idVanzator = prd.idVanzator,
@@ -83,7 +83,7 @@ namespace BusinessLayer_DBFirst
             return readProduse;
         }
 
-        public ReadProdusViewModel Get(int Id)
+        public ReadProdusDTO Get(int Id)
         {
             produse produs = _ProduseServices.Get(Id);
 
@@ -92,7 +92,7 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            ReadProdusViewModel readProdusViewModel = new ReadProdusViewModel()
+            ReadProdusDTO readProdusViewModel = new ReadProdusDTO()
             {
                 idProdus = produs.idProdus,
                 idVanzator = produs.idVanzator,
@@ -105,7 +105,7 @@ namespace BusinessLayer_DBFirst
             };
             return readProdusViewModel;
         }
-        public void Update(UpdateProdusViewModel updatedProdus)
+        public void Update(UpdateProdusDTO updatedProdus)
         {
             produse produsToBeUpdated = _ProduseServices.Get(updatedProdus.idProdus);
 
@@ -143,7 +143,7 @@ namespace BusinessLayer_DBFirst
             _ProduseServices.Delete(_ProduseServices.Get(id));
         }
 
-        public ReadProdusCuVanzatorViewModel GetProdusCuVanzator(int Id)
+        public ReadProdusCuVanzatorDTO GetProdusCuVanzator(int Id)
         {
 
             produse produs = _ProduseServices.Get(Id);
@@ -153,7 +153,7 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            ReadProdusCuVanzatorViewModel readProdusCuVanzator = new ReadProdusCuVanzatorViewModel()
+            ReadProdusCuVanzatorDTO readProdusCuVanzator = new ReadProdusCuVanzatorDTO()
             {
                 idProdus = produs.idProdus,
                 idVanzator = produs.idVanzator,
@@ -166,7 +166,7 @@ namespace BusinessLayer_DBFirst
             };
 
             vanzatori vanzator = _VanzatoriServices.GetAllQuerable().Where(x => x.idVanzator == produs.idVanzator).FirstOrDefault();
-            ReadVanzatorViewModel vanzatorViewModel = new ReadVanzatorViewModel()
+            ReadVanzatorDTO vanzatorViewModel = new ReadVanzatorDTO()
             {
                 idVanzator = vanzator.idVanzator,
                 numeVanzator = vanzator.numeVanzator,
@@ -181,7 +181,7 @@ namespace BusinessLayer_DBFirst
             return readProdusCuVanzator;
         }
 
-        public ReadProdusCuVanzatorViewModel readProdusCuVanzatorEager(int id)
+        public ReadProdusCuVanzatorDTO readProdusCuVanzatorEager(int id)
         {
             var produs = _ProduseServices.GetProduseWithVanzatori(id);
 
@@ -192,7 +192,7 @@ namespace BusinessLayer_DBFirst
 
             }
 
-            var produsViewModel = new ReadProdusCuVanzatorViewModel
+            var produsViewModel = new ReadProdusCuVanzatorDTO
             {
                 idProdus = produs.idProdus,
                 idVanzator = produs.idVanzator,
@@ -202,7 +202,7 @@ namespace BusinessLayer_DBFirst
                 unitateDeMasura = produs.unitateDeMasura,
                 cantitate = produs.cantitate,
                 imagine = produs.imagine,
-                vanzator = new ReadVanzatorViewModel
+                vanzator = new ReadVanzatorDTO
                 {
                     idVanzator = produs.vanzatori.idVanzator,
                     numeVanzator = produs.vanzatori.numeVanzator,
@@ -214,7 +214,7 @@ namespace BusinessLayer_DBFirst
 
             return produsViewModel;
         }
-        public List<ReadProdusCuVanzatorViewModel> GetProduseCuVanzatori()
+        public List<ReadProdusCuVanzatorDTO> GetProduseCuVanzatori()
         {
 
             List<produse> prdse = (List<produse>)_ProduseServices.GetAll();
@@ -224,11 +224,11 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            List<ReadProdusCuVanzatorViewModel> readProduseCuVanzatori = new List<ReadProdusCuVanzatorViewModel>();
+            List<ReadProdusCuVanzatorDTO> readProduseCuVanzatori = new List<ReadProdusCuVanzatorDTO>();
             foreach (produse prd in prdse) //not such a great implement, but enough for the moment
             {
                 vanzatori vanzator = _VanzatoriServices.GetAllQuerable().Where(x => x.idVanzator == prd.idVanzator).FirstOrDefault();
-                ReadVanzatorViewModel vanzatorViewModel = new ReadVanzatorViewModel()
+                ReadVanzatorDTO vanzatorViewModel = new ReadVanzatorDTO()
                 {
                     idVanzator = vanzator.idVanzator,
                     numeVanzator = vanzator.numeVanzator,
@@ -238,7 +238,7 @@ namespace BusinessLayer_DBFirst
                 };
                 if (vanzator != null)
                 {
-                    readProduseCuVanzatori.Add(new ReadProdusCuVanzatorViewModel()
+                    readProduseCuVanzatori.Add(new ReadProdusCuVanzatorDTO()
                     {
                         idProdus = prd.idProdus,
                         idVanzator = prd.idVanzator,
@@ -257,7 +257,7 @@ namespace BusinessLayer_DBFirst
             return readProduseCuVanzatori;
         }
 
-        public void AddCuDropdown(CreateProdusViewModelCuDropdown newProdus)
+        public void AddCuDropdown(CreateProdusCuDropdownDTO newProdus)
         {
             produse produs = new produse()
             {

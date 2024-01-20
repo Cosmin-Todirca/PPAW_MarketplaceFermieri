@@ -34,7 +34,7 @@ namespace BusinessLayer_DBFirst
         }
 
 
-        public void Add(CreateVanzatorViewModel newVanzator)
+        public void Add(CreateVanzatorDTO newVanzator)
         {
             vanzatori vanzator = new vanzatori()
             {
@@ -48,7 +48,7 @@ namespace BusinessLayer_DBFirst
             _VanzatoriServices.Add(vanzator);
         }
 
-        public List<ReadVanzatorViewModel> Get()
+        public List<ReadVanzatorDTO> Get()
         {
             List<vanzatori> vnztri = (List<vanzatori>)_VanzatoriServices.GetAllQuerable().Where(x => x.logicalDelete == false).ToList();
 
@@ -57,10 +57,10 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            List<ReadVanzatorViewModel> readVanzatori = new List<ReadVanzatorViewModel>();
+            List<ReadVanzatorDTO> readVanzatori = new List<ReadVanzatorDTO>();
             foreach (vanzatori vnztr in vnztri) //not such a great implement, but enough for the moment
             {
-                readVanzatori.Add(new ReadVanzatorViewModel()
+                readVanzatori.Add(new ReadVanzatorDTO()
                 {
                     idVanzator = vnztr.idVanzator,
                     numeVanzator = vnztr.numeVanzator,
@@ -74,7 +74,7 @@ namespace BusinessLayer_DBFirst
             return readVanzatori;
         }
 
-        public ReadVanzatorViewModel Get(int Id)
+        public ReadVanzatorDTO Get(int Id)
         {
             vanzatori vanzator = _VanzatoriServices.GetAllQuerable().Where(x => x.idVanzator == Id && x.logicalDelete == false).First();
 
@@ -83,7 +83,7 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            ReadVanzatorViewModel readVanzatorViewModel = new ReadVanzatorViewModel()
+            ReadVanzatorDTO readVanzatorViewModel = new ReadVanzatorDTO()
             {
                 idVanzator = vanzator.idVanzator,
                 numeVanzator = vanzator.numeVanzator,
@@ -95,7 +95,7 @@ namespace BusinessLayer_DBFirst
             return readVanzatorViewModel;
         }
 
-        public ReadVanzatorCardViewModel GetCard(int Id)
+        public ReadVanzatorCardDTO GetCard(int Id)
         {
             vanzatori vanzator = _VanzatoriServices.GetAllQuerable().Where(x => x.idVanzator == Id && x.logicalDelete == false).First();
 
@@ -115,11 +115,11 @@ namespace BusinessLayer_DBFirst
             var card = Mapper.Map<vanzatori, ReadVanzatorCardViewModel>(vanzator);
             */
 
-            var card = mapper.Map<vanzatori, ReadVanzatorCardViewModel>(vanzator);
+            var card = mapper.Map<vanzatori, ReadVanzatorCardDTO>(vanzator);
 
             return card;
         }
-        public List<ReadVanzatorCardViewModel> GetAllCard()
+        public List<ReadVanzatorCardDTO> GetAllCard()
         {
             List<vanzatori> vnztri = (List<vanzatori>)_VanzatoriServices.GetAllQuerable().Where(x => x.logicalDelete == false).ToList();
 
@@ -128,15 +128,15 @@ namespace BusinessLayer_DBFirst
                 throw new EntryNotFoundException("Id inexistent");
             }
 
-            List<ReadVanzatorCardViewModel> readVanzatori = new List<ReadVanzatorCardViewModel>();
+            List<ReadVanzatorCardDTO> readVanzatori = new List<ReadVanzatorCardDTO>();
             foreach (vanzatori vnztr in vnztri) //not such a great implement, but enough for the moment
             {
-                readVanzatori.Add(mapper.Map<vanzatori, ReadVanzatorCardViewModel>(vnztr));
+                readVanzatori.Add(mapper.Map<vanzatori, ReadVanzatorCardDTO>(vnztr));
             }
             return readVanzatori;
         }
 
-        public void Update(UpdateVanzatorViewModel updatedVanzator)
+        public void Update(UpdateVanzatorDTO updatedVanzator)
         {
             vanzatori vanzatorToBeUpdated = _VanzatoriServices.GetAllQuerable().Where(x => x.idVanzator == updatedVanzator.idVanzator && x.logicalDelete == false).First();
 
@@ -177,9 +177,9 @@ namespace BusinessLayer_DBFirst
             _VanzatoriServices.Update(vanzatorToBeDeleted, id);
         }
 
-        public List<ReadVanzatorViewModel> GetAll()
+        public List<ReadVanzatorDTO> GetAll()
         {
-            var listaVanzatori = _VanzatoriServices.GetAllQuerable().Select(x => new ReadVanzatorViewModel()
+            var listaVanzatori = _VanzatoriServices.GetAllQuerable().Select(x => new ReadVanzatorDTO()
             {
                 idVanzator = x.idVanzator,
                 numeVanzator = x.numeVanzator,

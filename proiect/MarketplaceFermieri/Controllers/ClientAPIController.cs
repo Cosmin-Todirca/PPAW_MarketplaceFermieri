@@ -21,7 +21,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/Client/Add")]
         [HttpPost]
-        public IHttpActionResult Add(CreateClientViewModel newClient)
+        public IHttpActionResult Add(CreateClientDTO newClient)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadClientViewModel readClientViewModel = clientServices.Get(idClient);
+                ReadClientDTO readClientViewModel = clientServices.Get(idClient);
                 return Ok(readClientViewModel);
             }
             catch (EntryNotFoundException e)
@@ -67,7 +67,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadClientViewModel> readClientViewModel = clientServices.Get();
+                List<ReadClientDTO> readClientViewModel = clientServices.Get();
                 return Ok(readClientViewModel);
             }
             catch (EntryNotFoundException e)
@@ -83,7 +83,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/Client/Put")]
         [HttpPut]
-        public IHttpActionResult Update(UpdateClientViewModel clientActualizat)
+        public IHttpActionResult Update(UpdateClientDTO clientActualizat)
         {
             try
             {

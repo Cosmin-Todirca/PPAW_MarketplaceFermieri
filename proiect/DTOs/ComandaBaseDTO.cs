@@ -12,7 +12,7 @@ namespace DTOs
         public decimal total { get; set; }
     }
 
-    public class CreateComandaViewModel
+    public class CreateComandaDTO
     {
         [Required(ErrorMessage = "IDClient is required")]
         [RegularExpression("([1-9][0-9]*)")]
@@ -27,7 +27,7 @@ namespace DTOs
         public decimal total { get; set; }
     }
 
-    public class ReadComandaViewModel
+    public class ReadComandaDTO
     {
         public int idComanda { get; set; }
         public int idClient { get; set; }
@@ -35,7 +35,7 @@ namespace DTOs
         public string situatieComanda { get; set; }
         public decimal total { get; set; }
     }
-    public class UpdateComandaViewModel
+    public class UpdateComandaDTO
     {
         [Required(ErrorMessage = "IDComanda is required")]
         [RegularExpression("([1-9][0-9]*)")]

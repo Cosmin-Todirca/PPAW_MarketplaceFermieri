@@ -25,7 +25,7 @@ namespace MarketplaceFermieri.Controllers
         // GET: Produse
         public ActionResult IndexMVC()
         {
-            IEnumerable<ReadProdusCuVanzatorViewModel> produsCuVanzatoriViewModel = new List<ReadProdusCuVanzatorViewModel>();
+            IEnumerable<ReadProdusCuVanzatorDTO> produsCuVanzatoriViewModel = new List<ReadProdusCuVanzatorDTO>();
             produsCuVanzatoriViewModel = new ProdusServices(_db).GetProduseCuVanzatori();
             return View(produsCuVanzatoriViewModel);
         }
@@ -33,7 +33,7 @@ namespace MarketplaceFermieri.Controllers
         // GET: Produse/Create
         public ActionResult CreateMVC()
         {
-            CreateProdusViewModelCuDropdown model = new CreateProdusViewModelCuDropdown();
+            CreateProdusCuDropdownDTO model = new CreateProdusCuDropdownDTO();
 
             return View(model);
         }
@@ -43,7 +43,7 @@ namespace MarketplaceFermieri.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateMVC(CreateProdusViewModelCuDropdown produsViewModel)
+        public ActionResult CreateMVC(CreateProdusCuDropdownDTO produsViewModel)
         {
             if (ModelState.IsValid)
             {

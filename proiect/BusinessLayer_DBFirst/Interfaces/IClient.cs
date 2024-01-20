@@ -5,10 +5,10 @@ namespace BusinessLayer_DBFirst.Interfaces
 {
     public interface IClient
     {
-        void Add(CreateClientViewModel newClient);
-        List<ReadClientViewModel> Get();
-        ReadClientViewModel Get(int Id);
-        void Update(UpdateClientViewModel updatedClient);
+        void Add(CreateClientDTO newClient);
+        List<ReadClientDTO> Get();
+        ReadClientDTO Get(int Id);
+        void Update(UpdateClientDTO updatedClient);
         void Delete(int id);
     }
 }

@@ -21,7 +21,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/Comanda/Add")]
         [HttpPost]
-        public IHttpActionResult Add(CreateComandaViewModel newComanda)
+        public IHttpActionResult Add(CreateComandaDTO newComanda)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadComandaViewModel readComandaViewModel = comandaServices.Get(idComanda);
+                ReadComandaDTO readComandaViewModel = comandaServices.Get(idComanda);
                 return Ok(readComandaViewModel);
             }
             catch (EntryNotFoundException e)
@@ -67,7 +67,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadComandaViewModel> readComandaViewModel = comandaServices.Get();
+                List<ReadComandaDTO> readComandaViewModel = comandaServices.Get();
                 return Ok(readComandaViewModel);
             }
             catch (EntryNotFoundException e)
@@ -82,7 +82,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/Comanda/Put")]
         [HttpPut]
-        public IHttpActionResult Update(UpdateComandaViewModel comandaActualizata)
+        public IHttpActionResult Update(UpdateComandaDTO comandaActualizata)
         {
             try
             {

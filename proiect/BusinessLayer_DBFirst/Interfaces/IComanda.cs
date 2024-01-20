@@ -5,10 +5,10 @@ namespace BusinessLayer_DBFirst.Interfaces
 {
     public interface IComanda
     {
-        void Add(CreateComandaViewModel newComanda);
-        List<ReadComandaViewModel> Get();
-        ReadComandaViewModel Get(int Id);
-        void Update(UpdateComandaViewModel updatedComanda);
+        void Add(CreateComandaDTO newComanda);
+        List<ReadComandaDTO> Get();
+        ReadComandaDTO Get(int Id);
+        void Update(UpdateComandaDTO updatedComanda);
         void Delete(int id);
     }
 }

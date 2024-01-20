@@ -21,7 +21,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/Produs/Add")]
         [HttpPost]
-        public IHttpActionResult Add(CreateProdusViewModel newProdus)
+        public IHttpActionResult Add(CreateProdusDTO newProdus)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadProdusViewModel readProdusViewModel = produsServices.Get(idProdus);
+                ReadProdusDTO readProdusViewModel = produsServices.Get(idProdus);
                 return Ok(readProdusViewModel);
             }
             catch (EntryNotFoundException e)
@@ -66,7 +66,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadProdusCuVanzatorViewModel> readProdusCuVanzatorViewModel = produsServices.GetProduseCuVanzatori();
+                List<ReadProdusCuVanzatorDTO> readProdusCuVanzatorViewModel = produsServices.GetProduseCuVanzatori();
                 return Ok(readProdusCuVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -82,7 +82,7 @@ namespace MarketplaceFermieri.Controllers
 
         [Route("api/Produs/Put")]
         [HttpPut]
-        public IHttpActionResult Update(UpdateProdusViewModel produsActualizat)
+        public IHttpActionResult Update(UpdateProdusDTO produsActualizat)
         {
             try
             {

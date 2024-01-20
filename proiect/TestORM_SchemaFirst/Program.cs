@@ -13,26 +13,26 @@ namespace TestORM_SchemaFirst
         static void Main(string[] args)
         {
             ClientServices c1 = new ClientServices(new marketplace_fermieriEntities(), new MemoryCacheService());
-            ReadClientViewModel c2 = c1.Get(1);
+            ReadClientDTO c2 = c1.Get(1);
             Console.WriteLine(c2.idClient + " " + c2.numeClient + " " + c2.prenumeClient + " " + c2.email + " " + c2.numarTelefon);
 
             VanzatorServices v1 = new VanzatorServices(new marketplace_fermieriEntities());
-            ReadVanzatorViewModel v2 = v1.Get(1);
+            ReadVanzatorDTO v2 = v1.Get(1);
             Console.WriteLine(v2.idVanzator + " " + v2.numeVanzator + " " + v2.prenumeVanzator + " " + v2.email + " " + v2.numarTelefon);
 
             ProdusServices p1 = new ProdusServices(new marketplace_fermieriEntities());
-            ReadProdusViewModel p2 = p1.Get(1);
+            ReadProdusDTO p2 = p1.Get(1);
             Console.WriteLine(p2.idProdus + " " + p2.idVanzator + " " + p2.numeProdus + " " + p2.descriereProdus + " " + p2.pret + " " + p2.unitateDeMasura + " " + p2.cantitate + " " + p2.imagine);
 
-            ReadProdusCuVanzatorViewModel p3 = p1.GetProdusCuVanzator(1);
+            ReadProdusCuVanzatorDTO p3 = p1.GetProdusCuVanzator(1);
             Console.WriteLine(p3.idProdus + " " + p3.idVanzator + " " + p3.numeProdus + " " + p3.descriereProdus + " "
                 + p3.pret + " " + p3.unitateDeMasura + " " + p3.cantitate + " " + p3.imagine + " "
                 + p3.vanzator.numeVanzator);
 
-            ReadProdusCuVanzatorViewModel produs = p1.GetProdusCuVanzator(1);
+            ReadProdusCuVanzatorDTO produs = p1.GetProdusCuVanzator(1);
             Console.WriteLine(produs.vanzator.numeVanzator);
 
-            List<ReadVanzatorViewModel> vanzators = v1.GetAll();
+            List<ReadVanzatorDTO> vanzators = v1.GetAll();
             foreach (var i in vanzators)
                 Console.Write(i.numeVanzator + " ");
             Console.WriteLine();
