@@ -1,23 +1,22 @@
-﻿using BusinessLayer_DBFirst;
+﻿using BusinessLayer_DBFirst.Interfaces;
+using DTOs;
 using Exceptions;
-using NivelAccessDate_DBFirst.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using ViewModels;
 
 namespace MarketplaceFermieri.Controllers
 {
     public class ClientAPIController : ApiController
     {
-        private IClient clientAccesor;
+        private IClient clientServices;
         public ClientAPIController()
         {
             //clientAccesor = new ClientServices();
         }
         public ClientAPIController(IClient clientServices)
         {
-            clientAccesor = clientServices;
+            this.clientServices = clientServices;
         }
 
         [Route("api/Client/Add")]
@@ -28,7 +27,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    clientAccesor.Add(newClient);
+                    clientServices.Add(newClient);
                     return Ok("Client adaugat cu succes");
                 }
                 else
@@ -49,7 +48,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadClientViewModel readClientViewModel = clientAccesor.Get(idClient);
+                ReadClientViewModel readClientViewModel = clientServices.Get(idClient);
                 return Ok(readClientViewModel);
             }
             catch (EntryNotFoundException e)
@@ -68,7 +67,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadClientViewModel> readClientViewModel = clientAccesor.Get();
+                List<ReadClientViewModel> readClientViewModel = clientServices.Get();
                 return Ok(readClientViewModel);
             }
             catch (EntryNotFoundException e)
@@ -90,7 +89,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    clientAccesor.Update(clientActualizat);
+                    clientServices.Update(clientActualizat);
                     return Ok("Actualizarea clientului reusita!");
                 }
                 else
@@ -114,7 +113,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                clientAccesor.Delete(idClient);
+                clientServices.Delete(idClient);
                 return Ok("Stergerea clientului realizata cu succes");
             }
             catch (EntryNotFoundException e)

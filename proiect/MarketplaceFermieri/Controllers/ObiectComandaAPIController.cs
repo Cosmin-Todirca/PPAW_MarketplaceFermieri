@@ -1,16 +1,15 @@
-﻿using BusinessLayer_DBFirst;
+﻿using BusinessLayer_DBFirst.Interfaces;
+using DTOs;
 using Exceptions;
-using NivelAccessDate_DBFirst.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using ViewModels;
 
 namespace MarketplaceFermieri.Controllers
 {
     public class ObiectComandaAPIController : ApiController
     {
-        private IObiectComanda obiectComandaAccesor;
+        private IObiectComanda obiectComandaServices;
 
         public ObiectComandaAPIController()
         {
@@ -18,7 +17,7 @@ namespace MarketplaceFermieri.Controllers
         }
         public ObiectComandaAPIController(IObiectComanda obiectComandaServices)
         {
-            obiectComandaAccesor = obiectComandaServices;
+            this.obiectComandaServices = obiectComandaServices;
         }
 
 
@@ -30,7 +29,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    obiectComandaAccesor.Add(newObiectComanda);
+                    obiectComandaServices.Add(newObiectComanda);
                     return Ok("Obiectul unei comenzi adaugat cu succes");
                 }
                 else
@@ -51,7 +50,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadObiectComandaViewModel readObiectComandaViewModel = obiectComandaAccesor.Get(idObiectComanda);
+                ReadObiectComandaViewModel readObiectComandaViewModel = obiectComandaServices.Get(idObiectComanda);
                 return Ok(readObiectComandaViewModel);
             }
             catch (EntryNotFoundException e)
@@ -70,7 +69,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadObiectComandaViewModel> readObiectComandaViewModel = obiectComandaAccesor.Get();
+                List<ReadObiectComandaViewModel> readObiectComandaViewModel = obiectComandaServices.Get();
                 return Ok(readObiectComandaViewModel);
             }
             catch (EntryNotFoundException e)
@@ -91,7 +90,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    obiectComandaAccesor.Update(obiectComandaActualizat);
+                    obiectComandaServices.Update(obiectComandaActualizat);
                     return Ok("Actualizarea obiectului unei comenzi reusit!");
                 }
                 else
@@ -115,7 +114,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                obiectComandaAccesor.Delete(idObiectComanda);
+                obiectComandaServices.Delete(idObiectComanda);
                 return Ok("Stergerea obiectului unei comenzi realizat cu succes");
             }
             catch (EntryNotFoundException e)

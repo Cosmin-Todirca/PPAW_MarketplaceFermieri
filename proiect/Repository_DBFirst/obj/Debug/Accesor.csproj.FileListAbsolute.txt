@@ -1,0 +1,2 @@
+D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\Repository_DBFirst\obj\Debug\Accesor.csproj.AssemblyReference.cache
+D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\Repository_DBFirst\obj\Debug\Accesor.csproj.CoreCompileInputs.cache

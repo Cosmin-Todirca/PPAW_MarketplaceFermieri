@@ -1,23 +1,22 @@
-﻿using BusinessLayer_DBFirst;
+﻿using BusinessLayer_DBFirst.Interfaces;
+using DTOs;
 using Exceptions;
-using NivelAccessDate_DBFirst.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using ViewModels;
 
 namespace MarketplaceFermieri.Controllers
 {
     public class ProdusAPIController : ApiController
     {
-        private IProdus produsAccesor;
+        private IProdus produsServices;
         public ProdusAPIController()
         {
             //produsAccesor = new ProdusServices();
         }
         public ProdusAPIController(IProdus produsServices)
         {
-            produsAccesor = produsServices;
+            this.produsServices = produsServices;
         }
 
         [Route("api/Produs/Add")]
@@ -28,7 +27,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    produsAccesor.Add(newProdus);
+                    produsServices.Add(newProdus);
                     return Ok("Produs adaugat cu succes");
                 }
                 else
@@ -49,7 +48,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadProdusViewModel readProdusViewModel = produsAccesor.Get(idProdus);
+                ReadProdusViewModel readProdusViewModel = produsServices.Get(idProdus);
                 return Ok(readProdusViewModel);
             }
             catch (EntryNotFoundException e)
@@ -67,7 +66,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadProdusCuVanzatorViewModel> readProdusCuVanzatorViewModel = produsAccesor.GetProduseCuVanzatori();
+                List<ReadProdusCuVanzatorViewModel> readProdusCuVanzatorViewModel = produsServices.GetProduseCuVanzatori();
                 return Ok(readProdusCuVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -89,7 +88,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    produsAccesor.Update(produsActualizat);
+                    produsServices.Update(produsActualizat);
                     return Ok("Actualizarea produsului reusita!");
                 }
                 else
@@ -113,7 +112,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                produsAccesor.Delete(idProdus);
+                produsServices.Delete(idProdus);
                 return Ok("Stergerea produsului realizata cu succes");
             }
             catch (EntryNotFoundException e)

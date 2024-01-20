@@ -1,10 +1,10 @@
 ﻿using BusinessLayer_DBFirst;
+using DTOs;
 using Repository_DBFirst;
 using System.Collections.Generic;
 using System.Net;
 //using System.Web.Http;
 using System.Web.Mvc;
-using ViewModels;
 
 namespace MarketplaceFermieri.Controllers
 {

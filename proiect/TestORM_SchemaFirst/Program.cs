@@ -1,10 +1,9 @@
-﻿using BusinessLayer_DBFirst;
-using NivelAccessDate_DBFirst;
-//using Repository_CodeFirst;
+﻿//using Repository_CodeFirst;
+using BusinessLayer_DBFirst;
+using DTOs;
 using Repository_DBFirst;
 using System;
 using System.Collections.Generic;
-using ViewModels;
 
 
 namespace TestORM_SchemaFirst

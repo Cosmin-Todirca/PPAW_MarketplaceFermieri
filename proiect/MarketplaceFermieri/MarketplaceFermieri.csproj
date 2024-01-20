@@ -363,21 +363,21 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer_DBFirst\BusinessLayer.csproj">
+      <Project>{ED073921-F6F2-4ED0-A6C8-E222B06BA56A}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTOs\DTOs.csproj">
+      <Project>{E8B146C4-F30D-434E-A7E3-B4617C4C3BA0}</Project>
+      <Name>DTOs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Exceptions\Exceptions.csproj">
       <Project>{5252f25c-6e95-49ad-8978-d5ea69139e78}</Project>
       <Name>Exceptions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NivelAccessDate_DBFirst\BusinessLayer.csproj">
-      <Project>{ed073921-f6f2-4ed0-a6c8-e222b06ba56a}</Project>
-      <Name>BusinessLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Repository_DBFirst\Repository_DBFirst.csproj">
       <Project>{82947cdb-1809-4980-897b-bc0f6d1b5495}</Project>
       <Name>Repository_DBFirst</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
-      <Project>{e8b146c4-f30d-434e-a7e3-b4617c4c3ba0}</Project>
-      <Name>ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

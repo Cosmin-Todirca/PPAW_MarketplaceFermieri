@@ -1,23 +1,22 @@
-﻿using BusinessLayer_DBFirst;
+﻿using BusinessLayer_DBFirst.Interfaces;
+using DTOs;
 using Exceptions;
-using NivelAccessDate_DBFirst.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using ViewModels;
 
 namespace MarketplaceFermieri.Controllers
 {
     public class VanzatorAPIController : ApiController
     {
-        private IVanzator vanzatorAccesor;
+        private IVanzator vanzatorServices;
         public VanzatorAPIController()
         {
             //vanzatorAccesor = new VanzatorServices();
         }
         public VanzatorAPIController(IVanzator vanzatorServices)
         {
-            vanzatorAccesor = vanzatorServices;
+            this.vanzatorServices = vanzatorServices;
         }
 
         [Route("api/Vanzator/Add")]
@@ -28,7 +27,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    vanzatorAccesor.Add(newVanzator);
+                    vanzatorServices.Add(newVanzator);
                     return Ok("Vanzator adaugat cu succes");
                 }
                 else
@@ -49,7 +48,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadVanzatorViewModel readVanzatorViewModel = vanzatorAccesor.Get(idVanzator);
+                ReadVanzatorViewModel readVanzatorViewModel = vanzatorServices.Get(idVanzator);
                 return Ok(readVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -68,7 +67,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                ReadVanzatorCardViewModel readVanzatorViewModel = vanzatorAccesor.GetCard(idVanzator);
+                ReadVanzatorCardViewModel readVanzatorViewModel = vanzatorServices.GetCard(idVanzator);
                 return Ok(readVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -87,7 +86,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadVanzatorViewModel> readVanzatorViewModel = vanzatorAccesor.Get();
+                List<ReadVanzatorViewModel> readVanzatorViewModel = vanzatorServices.Get();
                 return Ok(readVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -106,7 +105,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                List<ReadVanzatorCardViewModel> readVanzatorViewModel = vanzatorAccesor.GetAllCard();
+                List<ReadVanzatorCardViewModel> readVanzatorViewModel = vanzatorServices.GetAllCard();
                 return Ok(readVanzatorViewModel);
             }
             catch (EntryNotFoundException e)
@@ -127,7 +126,7 @@ namespace MarketplaceFermieri.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    vanzatorAccesor.Update(vanzatorActualizat);
+                    vanzatorServices.Update(vanzatorActualizat);
                     return Ok("Actualizarea vanzatorului reusita!");
                 }
                 else
@@ -151,7 +150,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                vanzatorAccesor.Delete(idVanzator);
+                vanzatorServices.Delete(idVanzator);
                 return Ok("Stergerea vanzatorului realizata cu succes");
             }
             catch (EntryNotFoundException e)
@@ -170,7 +169,7 @@ namespace MarketplaceFermieri.Controllers
         {
             try
             {
-                vanzatorAccesor.LogicalDelete(idVanzator);
+                vanzatorServices.LogicalDelete(idVanzator);
                 return Ok("Stergerea vanzatorului realizata cu succes");
             }
             catch (EntryNotFoundException e)

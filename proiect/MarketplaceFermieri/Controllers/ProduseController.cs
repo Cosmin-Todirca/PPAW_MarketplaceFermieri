@@ -1,8 +1,8 @@
 ﻿using BusinessLayer_DBFirst;
+using DTOs;
 using Repository_DBFirst;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using ViewModels;
 
 namespace MarketplaceFermieri.Controllers
 {

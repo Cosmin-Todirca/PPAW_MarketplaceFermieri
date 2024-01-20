@@ -1,8 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using BusinessLayer_DBFirst;
-using NivelAccessDate_DBFirst;
-using NivelAccessDate_DBFirst.Interfaces;
+using BusinessLayer_DBFirst.Interfaces;
 using Repository_DBFirst;
 using System.Reflection;
 using System.Web.Http;

@@ -183,7 +183,6 @@ D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceF
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\Microsoft.Web.Infrastructure.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\Newtonsoft.Json.dll
-D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\NivelAccessDate_DBFirst.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\Repository_DBFirst.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\System.Buffers.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\System.Diagnostics.DiagnosticSource.dll
@@ -207,8 +206,6 @@ D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceF
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\Services.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\AutoMapper.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\Exceptions.pdb
-D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\NivelAccessDate_DBFirst.pdb
-D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\NivelAccessDate_DBFirst.dll.config
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\Repository_DBFirst.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\Repository_DBFirst.dll.config
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\ViewModels.pdb
@@ -247,3 +244,6 @@ D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceF
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\obj\Debug\MarketplaceFermieri.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\obj\Debug\MarketplaceFermieri.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\NLog.config
+D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\BusinessLayer_DBFirst.dll
+D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\BusinessLayer_DBFirst.pdb
+D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\MarketplaceFermieri\bin\BusinessLayer_DBFirst.dll.config
