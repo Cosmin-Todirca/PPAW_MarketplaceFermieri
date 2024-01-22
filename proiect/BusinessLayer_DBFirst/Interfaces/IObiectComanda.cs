@@ -10,6 +10,8 @@ namespace BusinessLayer_DBFirst.Interfaces
 
         List<ReadObiectComandaDTO> Get();
         ReadObiectComandaDTO Get(int Id);
+        ReadObiectComandaCartDTO Get(int idComanda, int idClient);
+
         void Update(UpdateObiectComandaDTO updatedObiectComanda);
         void Delete(int id);
     }

@@ -4,6 +4,7 @@ using Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Repository_DBFirst;
 
 namespace MarketplaceFermieri.Controllers
 {
@@ -75,6 +76,25 @@ namespace MarketplaceFermieri.Controllers
             {
                 ReadObiectComandaDTO readObiectComandaViewModel = obiectComandaServices.Get(idObiectComanda);
                 return Ok(readObiectComandaViewModel);
+            }
+            catch (EntryNotFoundException e)
+            {
+                return BadRequest("Id inexistent" + e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Exceptie la citirea obiectului unei comenzi" + e.Message);
+            }
+        }
+
+        [Route("api/ObiectComanda/GetCart")]
+        [HttpGet]
+        public IHttpActionResult Read(int idComanda, int idClient)
+        {
+            try
+            {
+                ReadObiectComandaCartDTO readObiectComandaCartDTO = obiectComandaServices.Get(idComanda, idClient);
+                return Ok(readObiectComandaCartDTO);
             }
             catch (EntryNotFoundException e)
             {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DTOs
 {
@@ -60,4 +61,25 @@ namespace DTOs
         [Range(0, 10000, ErrorMessage = "Quantity must be between 0 and 10000 units")]
         public decimal cantitateComanda { get; set; }
     }
+
+    public class ReadObiectComandaCuProdusDTO
+    {
+        public int idObiectComanda { get; set; }
+        public int idComanda { get; set; }
+        public int idProdus { get; set; }
+        public int idClient { get; set; }
+        public string situatiePlata { get; set; }
+        public decimal cantitateComanda { get; set; }
+        public ReadProdusDTO produs { get; set; }
+
+    }
+    public class ReadObiectComandaCartDTO
+    { 
+        public List<ReadObiectComandaCuProdusDTO> obiecteComanda { get; set; }
+        public decimal totalPrice { get; set; }
+        public decimal transportPrice { get; set; }
+        public decimal totalDiscount { get; set; }
+        
+    }
+
 }

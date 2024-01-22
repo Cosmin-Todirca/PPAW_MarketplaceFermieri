@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="ClientServices.cs" />
     <Compile Include="ComandaServices.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Interfaces\ICache.cs" />
     <Compile Include="Interfaces\IClient.cs" />
     <Compile Include="Interfaces\IComanda.cs" />

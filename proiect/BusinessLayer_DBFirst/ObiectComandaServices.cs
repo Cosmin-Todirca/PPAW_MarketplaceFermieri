@@ -5,6 +5,7 @@ using DTOs;
 using Exceptions;
 using Repository_DBFirst;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLayer_DBFirst
 {
@@ -12,6 +13,8 @@ namespace BusinessLayer_DBFirst
     {
         private marketplace_fermieriEntities _db;
         private ObiecteComandaAccesor _ObiecteComandaServices;
+        private ProduseAccesor _ProduseAccesor;
+
 
         public ObiectComandaServices()
         {
@@ -23,6 +26,7 @@ namespace BusinessLayer_DBFirst
         {
             _db = (marketplace_fermieriEntities)db;
             _ObiecteComandaServices = new ObiecteComandaAccesor(_db);
+            _ProduseAccesor = new ProduseAccesor(_db);
         }
 
         public void Add(CreateObiectComandaDTO newObiectComanda)
@@ -106,7 +110,59 @@ namespace BusinessLayer_DBFirst
             };
             return readObiectComandaViewModel;
         }
-        public void Update(UpdateObiectComandaDTO updatedObiectComanda)
+
+        public ReadObiectComandaCartDTO Get(int idComanda, int idClient)
+        {
+            List<obiecteComanda> bctCmnda = _ObiecteComandaServices.GetAll().Where(x => x.idComanda==idComanda && x.idClient==idClient ).ToList();
+
+            if (bctCmnda == null)
+            {
+                throw new EntryNotFoundException("Id inexistent");
+            }
+
+            List<ReadObiectComandaCuProdusDTO> readObiecteComanda = new List<ReadObiectComandaCuProdusDTO>();
+            decimal totalPrice = 0;
+            decimal totalQuantity = 0;
+            decimal transportPrice = Constants.transportPrice;
+            decimal totalDiscount = 0;
+            foreach (obiecteComanda bctCmnd in bctCmnda) //not such a great implement, but enough for the moment
+            {
+                produse produsCumparat = _ProduseAccesor.Get(bctCmnd.idProdus);
+                ReadProdusDTO prd = new ReadProdusDTO()
+                {
+                    idProdus = produsCumparat.idProdus,
+                    idVanzator = produsCumparat.idVanzator,
+                    numeProdus = produsCumparat.numeProdus,
+                    descriereProdus = produsCumparat.descriereProdus,
+                    pret = produsCumparat.pret,
+                    unitateDeMasura = produsCumparat.unitateDeMasura,
+                    cantitate = produsCumparat.cantitate,
+                    imagine = produsCumparat.imagine
+                };
+                readObiecteComanda.Add(new ReadObiectComandaCuProdusDTO()
+                {
+                    idObiectComanda = bctCmnd.idObiectComanda,
+                    idComanda = bctCmnd.idComanda,
+                    idProdus = bctCmnd.idProdus,
+                    idClient = bctCmnd.idClient,
+                    situatiePlata = bctCmnd.situatiePlata,
+                    cantitateComanda = bctCmnd.cantitateComanda,
+                    produs = prd
+                });
+                totalPrice += prd.pret * bctCmnd.cantitateComanda;
+            }
+            if(totalPrice > Constants.storeOfferFreeTransportTargetPrice) {
+                totalDiscount = transportPrice;
+                transportPrice = 0;
+            }
+            ReadObiectComandaCartDTO cart = new ReadObiectComandaCartDTO();
+            cart.obiecteComanda = readObiecteComanda;
+            cart.totalPrice= totalPrice;
+            cart.totalDiscount= totalDiscount;
+            cart.transportPrice= transportPrice;
+            return cart;
+        }
+            public void Update(UpdateObiectComandaDTO updatedObiectComanda)
         {
             obiecteComanda obiectComandaToBeUpdated = _ObiecteComandaServices.Get(updatedObiectComanda.idClient);
 

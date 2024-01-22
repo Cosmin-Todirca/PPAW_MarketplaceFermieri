@@ -1,7 +1,7 @@
 ﻿<div class="d-flex d-block mb-5 justify-content-between">
     <h2>Lista cu toate produsele</h2>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkout">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkout" v-on:click="GetCart()">
         Checkout. Am terminat cumparaturile
     </button>
 </div>
@@ -33,7 +33,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="(obiect, index) in cart.obiecteComanda" :key="cart.obiecteComanda.idObiectComanda">Cras justo odio</li>
+                    <li class="list-group-item">Pret total: {{cart.totalPrice}} lei</li>
+                    <li class="list-group-item">Transport: {{cart.transportPrice}} lei</li>
+                    <li class="list-group-item">Discount oferit: {{cart.totalDiscount}} lei</li>
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ma mai gandesc</button>
@@ -65,6 +70,13 @@
                     idClient: null,
                     situatiePlata: null,
                     cantitateComanda: null
+                },
+                cart: {
+                    obiecteComanda: [],
+                    totalPrice: null,
+                    totalQuantity: null,
+                    transportPrice: null,
+                    totalDiscount: null
                 },
                 plata: "Cash",
 
@@ -126,6 +138,14 @@
                     this.$http.get('api/Comanda/GetNewOrder?idClient=' + this.idClientSelectat).then(
                         function success(response) {
                             this.comanda = response.body;
+                            console.log(response.body);//debug purposes
+                        }, function error(response) {
+                        });
+                },
+                GetCart: function () {
+                    this.$http.get('api/ObiectComanda/GetCart?idComanda=' + this.comanda.idComanda + '&idClient=' + this.idClientSelectat).then(
+                        function success(response) {
+                            this.cart = response.body;
                             console.log(response.body);//debug purposes
                         }, function error(response) {
                         });
