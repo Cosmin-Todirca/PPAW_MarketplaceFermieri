@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="EntityValidationException.cs" />
     <Compile Include="EntryNotFoundException.cs" />
+    <Compile Include="InsufficientStockException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

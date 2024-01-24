@@ -76,10 +76,12 @@ namespace DTOs
     public class ReadObiectComandaCartDTO
     { 
         public List<ReadObiectComandaCuProdusDTO> obiecteComanda { get; set; }
-        public decimal totalPrice { get; set; }
         public decimal transportPrice { get; set; }
         public decimal totalDiscount { get; set; }
-        
+        public decimal totalPriceWithoutTransport { get; set; }
+        public decimal totalPrice { get; set; }
+
+
     }
 
 }

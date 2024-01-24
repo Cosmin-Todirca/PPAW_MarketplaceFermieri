@@ -4,6 +4,7 @@ using BusinessLayer_DBFirst.Interfaces;
 using DTOs;
 using Exceptions;
 using Repository_DBFirst;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,8 @@ namespace BusinessLayer_DBFirst
     {
         private marketplace_fermieriEntities _db;
         private ComenziAccesor _ComenziServices;
+        private ProduseAccesor _ProduseAccesor;
+        private ObiecteComandaAccesor _ObiecteComandaAccesor;
 
         public ComandaServices()
         {
@@ -24,6 +27,8 @@ namespace BusinessLayer_DBFirst
         {
             _db = (marketplace_fermieriEntities)db;
             _ComenziServices = new ComenziAccesor(_db);
+            _ProduseAccesor = new ProduseAccesor(_db);
+            _ObiecteComandaAccesor = new ObiecteComandaAccesor(_db);
         }
 
         public void Add(CreateComandaDTO newComanda)
@@ -86,7 +91,7 @@ namespace BusinessLayer_DBFirst
 
         public ReadComandaDTO ReadNewOrder(int idClient)
         {
-            comenzi comandaNoua = _ComenziServices.GetAllQuerable().Where(x => x.situatieComanda == "Nou" && x.idClient == idClient).FirstOrDefault();
+            comenzi comandaNoua = _ComenziServices.GetAllQuerable().Where(x => x.situatieComanda=="Nou" && x.idClient == idClient).FirstOrDefault();
             if (comandaNoua == null)
             {
                 comenzi comanda = new comenzi()
@@ -98,7 +103,7 @@ namespace BusinessLayer_DBFirst
                 };
 
                 _ComenziServices.Add(comanda);
-                comandaNoua = _ComenziServices.GetAllQuerable().Where(x => x.situatieComanda == "Nou" && x.idClient == idClient).FirstOrDefault();
+                comandaNoua = _ComenziServices.GetAllQuerable().Where(x => x.situatieComanda == "Nou").Where(x => x.idClient == idClient).FirstOrDefault();
                 if (comandaNoua == null)
                 {
                     throw new EntryNotFoundException("Eroare la preluarea unei comenzi noi.");
@@ -120,7 +125,7 @@ namespace BusinessLayer_DBFirst
 
             public void Update(UpdateComandaDTO updatedComanda)
         {
-            comenzi comandaToBeUpdated = _ComenziServices.Get(updatedComanda.idClient);
+            comenzi comandaToBeUpdated = _ComenziServices.Get(updatedComanda.idComanda);
 
             if (comandaToBeUpdated == null)
             {
@@ -129,10 +134,45 @@ namespace BusinessLayer_DBFirst
 
             comandaToBeUpdated.idComanda = updatedComanda.idComanda;
             comandaToBeUpdated.idClient = updatedComanda.idClient;
-            //comandaToBeUpdated.dataComanda = updatedComanda.dataComanda;
+            comandaToBeUpdated.dataComanda = System.DateTime.Now;
             comandaToBeUpdated.situatieComanda = updatedComanda.situatieComanda;
             comandaToBeUpdated.total = updatedComanda.total;
-            _ComenziServices.Update(comandaToBeUpdated, updatedComanda.idClient);
+            _ComenziServices.Update(comandaToBeUpdated, updatedComanda.idComanda);
+        }
+
+        public void UpdateAndStockUpdate(UpdateComandaDTO updatedComanda) //BUSINESSLOGIC
+        {
+            comenzi comandaToBeUpdated = _ComenziServices.Get(updatedComanda.idComanda);
+
+            if (comandaToBeUpdated == null)
+            {
+                throw new EntryNotFoundException("Id inexistent");
+            }
+
+            comandaToBeUpdated.idComanda = updatedComanda.idComanda;
+            comandaToBeUpdated.idClient = updatedComanda.idClient;
+            comandaToBeUpdated.dataComanda = System.DateTime.Now;
+            comandaToBeUpdated.situatieComanda = updatedComanda.situatieComanda;
+            comandaToBeUpdated.total = updatedComanda.total;
+
+            List<obiecteComanda> obtComanda = _ObiecteComandaAccesor.GetAll().Where(x =>x.idComanda == comandaToBeUpdated.idComanda).ToList();
+            List<produse> prdList = new List<produse>();
+            for (int i = 0; i < obtComanda.Count; i++)
+            {
+                produse prd = _ProduseAccesor.Get(obtComanda[i].idProdus);
+                if (prd.cantitate - obtComanda[i].cantitateComanda<0)
+                {
+                    throw new InsufficientStockException("Ai depasit cantitatea admisa pentru produsul cu id: "+prd.idProdus);
+                }
+                prdList.Add(prd);
+
+            }
+            for (int i = 0; i < obtComanda.Count;  i++)
+            {
+                prdList[i].cantitate -= obtComanda[i].cantitateComanda;
+                _ProduseAccesor.Update(prdList[i], prdList[i].idProdus);
+            }
+            _ComenziServices.Update(comandaToBeUpdated, updatedComanda.idComanda);
         }
         public void Delete(int id)
         {

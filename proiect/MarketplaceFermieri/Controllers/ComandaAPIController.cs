@@ -126,6 +126,32 @@ namespace MarketplaceFermieri.Controllers
             }
         }
 
+        [Route("api/Comanda/PutAndStock")]
+        [HttpPut]
+        public IHttpActionResult UpdateAndStock(UpdateComandaDTO comandaActualizata)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    comandaServices.UpdateAndStockUpdate(comandaActualizata);
+                    return Ok("Actualizarea comenzii reusita!");
+                }
+                else
+                {
+                    return BadRequest("Eroare la actualizarea comenzii");
+                }
+            }
+            catch (EntryNotFoundException e)
+            {
+                return BadRequest("Id inexistent" + e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Exceptie la actualizarea comenzii" + e.Message);
+            }
+        }
+
         [Route("api/Comanda/Delete")]
         [HttpDelete]
         public IHttpActionResult Delete(int idComanda)

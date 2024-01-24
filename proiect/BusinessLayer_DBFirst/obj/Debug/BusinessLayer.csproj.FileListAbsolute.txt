@@ -98,6 +98,8 @@ D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\NivelAccessD
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\NivelAccessDate_DBFirst\bin\Debug\BusinessLayer_DBFirst.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\NivelAccessDate_DBFirst\obj\Debug\BusinessLayer_DBFirst.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\NivelAccessDate_DBFirst\obj\Debug\BusinessLayer_DBFirst.pdb
+D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\BusinessLayer_DBFirst.dll.config
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\BusinessLayer_DBFirst.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\BusinessLayer_DBFirst.pdb
@@ -130,10 +132,10 @@ D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLaye
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\System.Web.WebPages.Deployment.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\Services.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\Services.dll.config
+D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\ViewModels.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\Exceptions.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\Repository_DBFirst.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\Repository_DBFirst.dll.config
-D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\ViewModels.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\AutoMapper.pdb
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\AutoMapper.xml
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\EntityFramework.xml
@@ -157,8 +159,6 @@ D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLaye
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\System.Web.WebPages.Razor.xml
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\System.Web.Razor.xml
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\bin\Debug\System.Web.WebPages.Deployment.xml
-D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
-D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\obj\Debug\BusinessLayer.csproj.CopyComplete
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\obj\Debug\BusinessLayer_DBFirst.dll
 D:\Masterat\An1Semestrul1\PPAW\git\PPAW_MarketplaceFermieri\proiect\BusinessLayer_DBFirst\obj\Debug\BusinessLayer_DBFirst.pdb

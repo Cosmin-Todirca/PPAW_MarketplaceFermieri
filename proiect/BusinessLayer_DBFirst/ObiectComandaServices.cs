@@ -43,8 +43,9 @@ namespace BusinessLayer_DBFirst
             _ObiecteComandaServices.Add(obiectComanda);
         }
 
-        public void AddToCart(CreateObiectComandaDTO newObiectComanda) //BUSINESSLOGIC
+        public void AddToCart(CreateObiectComandaDTO newObiectComanda) //BUSINESSLOGIC. Daca obiectul de comanda exista, doar se actualizeaza cantitatea
         {
+            bool gasit = false;
             obiecteComanda obiectComanda = new obiecteComanda()
             {
                 idComanda = newObiectComanda.idComanda,
@@ -53,15 +54,29 @@ namespace BusinessLayer_DBFirst
                 situatiePlata = newObiectComanda.situatiePlata,
                 cantitateComanda = newObiectComanda.cantitateComanda
             };
-            obiecteComanda obtComanda = _ObiecteComandaServices.Get(obiectComanda.idComanda);
-            if (obtComanda == null)
+            List<obiecteComanda> obtComanda = _ObiecteComandaServices.GetAll().Where(x=> x.idComanda== obiectComanda.idComanda).ToList();
+            for(int i = 0; i < obtComanda.Count; i++)
+            {
+                if (obiectComanda.idProdus == obtComanda[i].idProdus)
+                {
+                    gasit = true;
+                    obiectComanda.idObiectComanda = obtComanda[i].idObiectComanda;
+                    obiectComanda.cantitateComanda += obtComanda[i].cantitateComanda;
+                }
+            }
+            produse prd = _ProduseAccesor.Get(obiectComanda.idProdus); //verific sa nu depasim stockul
+            if(obiectComanda.cantitateComanda>prd.cantitate)
+            {
+                obiectComanda.cantitateComanda = prd.cantitate;
+            }
+
+            if (!gasit)
             {
                 _ObiecteComandaServices.Add(obiectComanda);
             }
             else
             {
-                obiectComanda.cantitateComanda += obtComanda.cantitateComanda;
-                _ObiecteComandaServices.Update(obiectComanda, obiectComanda.idClient);
+                _ObiecteComandaServices.Update(obiectComanda, obiectComanda.idObiectComanda);
             }
         }
 
@@ -111,7 +126,7 @@ namespace BusinessLayer_DBFirst
             return readObiectComandaViewModel;
         }
 
-        public ReadObiectComandaCartDTO Get(int idComanda, int idClient)
+        public ReadObiectComandaCartDTO Get(int idComanda, int idClient) //BUSINESSLOGIC get items from cart for placing the order
         {
             List<obiecteComanda> bctCmnda = _ObiecteComandaServices.GetAll().Where(x => x.idComanda==idComanda && x.idClient==idClient ).ToList();
 
@@ -121,10 +136,9 @@ namespace BusinessLayer_DBFirst
             }
 
             List<ReadObiectComandaCuProdusDTO> readObiecteComanda = new List<ReadObiectComandaCuProdusDTO>();
-            decimal totalPrice = 0;
-            decimal totalQuantity = 0;
             decimal transportPrice = Constants.transportPrice;
             decimal totalDiscount = 0;
+            decimal totalPrice = 0;
             foreach (obiecteComanda bctCmnd in bctCmnda) //not such a great implement, but enough for the moment
             {
                 produse produsCumparat = _ProduseAccesor.Get(bctCmnd.idProdus);
@@ -153,18 +167,19 @@ namespace BusinessLayer_DBFirst
             }
             if(totalPrice > Constants.storeOfferFreeTransportTargetPrice) {
                 totalDiscount = transportPrice;
-                transportPrice = 0;
             }
             ReadObiectComandaCartDTO cart = new ReadObiectComandaCartDTO();
             cart.obiecteComanda = readObiecteComanda;
-            cart.totalPrice= totalPrice;
-            cart.totalDiscount= totalDiscount;
             cart.transportPrice= transportPrice;
+            cart.totalDiscount = totalDiscount;
+            cart.totalPriceWithoutTransport = totalPrice;
+            cart.totalPrice = totalPrice + transportPrice - totalDiscount;
+
             return cart;
         }
             public void Update(UpdateObiectComandaDTO updatedObiectComanda)
         {
-            obiecteComanda obiectComandaToBeUpdated = _ObiecteComandaServices.Get(updatedObiectComanda.idClient);
+            obiecteComanda obiectComandaToBeUpdated = _ObiecteComandaServices.Get(updatedObiectComanda.idObiectComanda);
 
             if (obiectComandaToBeUpdated == null)
             {
@@ -177,7 +192,31 @@ namespace BusinessLayer_DBFirst
             obiectComandaToBeUpdated.idClient = updatedObiectComanda.idClient;
             obiectComandaToBeUpdated.situatiePlata = updatedObiectComanda.situatiePlata;
             obiectComandaToBeUpdated.cantitateComanda = updatedObiectComanda.cantitateComanda;
-            _ObiecteComandaServices.Update(obiectComandaToBeUpdated, updatedObiectComanda.idClient);
+            _ObiecteComandaServices.Update(obiectComandaToBeUpdated, updatedObiectComanda.idObiectComanda);
+        }
+
+        public void UpdateObiectComanda(UpdateObiectComandaDTO updatedObiectComanda)
+        {
+            obiecteComanda obiectComandaToBeUpdated = _ObiecteComandaServices.Get(updatedObiectComanda.idObiectComanda);
+
+            if (obiectComandaToBeUpdated == null)
+            {
+                throw new EntryNotFoundException("Id inexistent");
+            }
+
+            obiectComandaToBeUpdated.idObiectComanda = updatedObiectComanda.idObiectComanda;
+            obiectComandaToBeUpdated.idComanda = updatedObiectComanda.idComanda;
+            obiectComandaToBeUpdated.idProdus = updatedObiectComanda.idProdus;
+            obiectComandaToBeUpdated.idClient = updatedObiectComanda.idClient;
+            obiectComandaToBeUpdated.situatiePlata = updatedObiectComanda.situatiePlata;
+            obiectComandaToBeUpdated.cantitateComanda = updatedObiectComanda.cantitateComanda;
+
+            produse prd = _ProduseAccesor.Get(obiectComandaToBeUpdated.idProdus); //verific sa nu depasim stockul
+            if (obiectComandaToBeUpdated.cantitateComanda > prd.cantitate)
+            {
+                obiectComandaToBeUpdated.cantitateComanda = prd.cantitate;
+            }
+            _ObiecteComandaServices.Update(obiectComandaToBeUpdated, updatedObiectComanda.idObiectComanda);
         }
         public void Delete(int id)
         {

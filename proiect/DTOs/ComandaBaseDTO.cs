@@ -43,7 +43,8 @@ namespace DTOs
         [Required(ErrorMessage = "IDClient is required")]
         [RegularExpression("([1-9][0-9]*)")]
         public int idClient { get; set; }
-        //public DateTime dataComanda { get; set; }
+        [Required(ErrorMessage = "DateTime is required")]
+        public DateTime dataComanda { get; set; }
         [Required(ErrorMessage = "Status is required")]
         [StringLength(50)]
         public string situatieComanda { get; set; }

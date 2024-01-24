@@ -34,15 +34,32 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group">
-                    <li class="list-group-item" v-for="(obiect, index) in cart.obiecteComanda" :key="cart.obiecteComanda.idObiectComanda">Cras justo odio</li>
-                    <li class="list-group-item">Pret total: {{cart.totalPrice}} lei</li>
+                    <li class="list-group-item list-group-item-warning d-flex justify-content-between align-items-center" v-for="(obiect, index) in cart.obiecteComanda" :key="cart.obiecteComanda.idObiectComanda">
+
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">
+                                {{obiect.produs.numeProdus}}
+                            </div>
+                            <div>Cantitate cumparata: {{obiect.cantitateComanda}}</div>
+                            <div>Pret per unitate: {{obiect.produs.pret}}</div>
+                            <div>
+                                <button type="button" class="btn btn-light" v-on:click="ActualizeazaObiectComanda(obiect, -1, index)">-</button>
+                                <button type="button" class="btn btn-light" v-on:click="ActualizeazaObiectComanda(obiect, +1, index)">+</button>
+                                <button type="button" class="btn btn-light" v-on:click="ActualizeazaObiectComanda(obiect, 0, index)">❌</button>
+
+                            </div>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">Stock: {{obiect.produs.cantitate}} </span>
+                    </li>
                     <li class="list-group-item">Transport: {{cart.transportPrice}} lei</li>
                     <li class="list-group-item">Discount oferit: {{cart.totalDiscount}} lei</li>
+                    <li class="list-group-item">Pret fara transport sau discount: {{cart.totalPriceWithoutTransport}} lei</li>
+                    <li class="list-group-item list-group-item-secondary">Pret total: {{cart.totalPrice}} lei</li>
                 </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ma mai gandesc</button>
-                <button type="button" class="btn btn-primary">Plaseaza comanda</button>
+                <button type="button" class="btn btn-primary" v-on:click="PlaseazaComanda()">Plaseaza comanda</button>
             </div>
         </div>
     </div>
@@ -73,10 +90,11 @@
                 },
                 cart: {
                     obiecteComanda: [],
-                    totalPrice: null,
                     totalQuantity: null,
                     transportPrice: null,
-                    totalDiscount: null
+                    totalDiscount: null,
+                    totalPriceWithoutTransport: null,
+                    totalPrice: null
                 },
                 plata: "Cash",
 
@@ -97,7 +115,7 @@
                 ChangePicture: function () {
                     for (let i = 0; i < this.produseCuVanzatori.length; i++) {
                         //console.log(this.produseCuVanzatori[i].image);
-                        if (this.produseCuVanzatori[i].image === null || this.produseCuVanzatori[i].image === undefined ) {
+                        if (this.produseCuVanzatori[i].image === null || this.produseCuVanzatori[i].image === undefined) {
                             this.produseCuVanzatori[i].image = "./Static/nopicture.jpg";
                             //console.log(this.produseCuVanzatori[i].image);
 
@@ -120,7 +138,7 @@
                     this.obiectComanda.idClient = this.idClientSelectat;
                     this.obiectComanda.situatiePlata = this.plata;
                     this.obiectComanda.cantitateComanda = this.numarObiecteComanda[index];
-                    
+
                     this.$http.post('api/ObiectComanda/AddToCart', this.obiectComanda).then(
                         function success(response) {
                             console.log(response.body);//debug purposes
@@ -128,7 +146,7 @@
                             this.numarObiecteComanda[index] = 0;
                             console.log("Produs Inregistrat!");
                         }, function error(response) {
-                    });
+                        });
                 },
                 LocalStorageGetClient: function () {
                     this.idClientSelectat = localStorage.getItem("userData");
@@ -150,6 +168,73 @@
                         }, function error(response) {
                         });
                 },
+                PlaseazaComanda: function () {
+                    this.comanda.situatieComanda = "In procesare";
+                    this.comanda.total = this.cart.totalPrice;
+
+                    this.$http.put('api/Comanda/PutAndStock', this.comanda).then(
+                        function success(response) {
+                            console.log(response.body);//debug purposes
+                            window.location.href = '/Home';
+                        }, function error(response) {
+                        });
+                },
+                ActualizeazaObiectComanda: function (obiect, functie, index) {
+                    let obiectComandaAux = {
+                        idObiectComanda: obiect.idObiectComanda,
+                        idComanda: obiect.idComanda,
+                        idProdus: obiect.idProdus,
+                        idClient: obiect.idClient,
+                        situatiePlata: obiect.situatiePlata,
+                        cantitateComanda: obiect.cantitateComanda
+                    }
+
+                    switch (functie) {
+                        case -1:
+                            obiectComandaAux.cantitateComanda = obiectComandaAux.cantitateComanda - 1;
+                            if (obiectComandaAux.cantitateComanda == 0) {
+                                this.$http.delete('api/ObiectComanda/Delete?idObiectComanda=' + obiect.idObiectComanda).then(
+                                    function success(response) {
+                                        this.GetCart(); //logica e prea mare ca sa o reproduc aici.
+                                        console.log(response.body);//debug purposes
+                                    }, function error(response) {
+                                    });
+                            }
+                            else {
+                                this.$http.put('api/ObiectComanda/PutObiect', obiectComandaAux).then(
+                                    function success(response) {
+                                        //Vue.set(this.cart.obiecteComanda, index, obiectComandaAux);
+                                        //this.cart.obiecteComanda = [...this.cart.obiecteComanda]; //spread operator
+                                        //this.cart.obiecteComanda[index].cantitateComanda = obiectComandaAux.cantitateComanda;
+                                        this.GetCart(); //logica e prea mare ca sa o reproduc aici.
+                                        console.log(response.body);//debug purposes
+                                    }, function error(response) {
+                                    });
+                            }
+
+                            break;
+                        case 0:
+                            this.$http.delete('api/ObiectComanda/Delete?idObiectComanda=' + obiect.idObiectComanda).then(
+                                function success(response) {
+                                    this.GetCart(); //logica e prea mare ca sa o reproduc aici.
+                                    console.log(response.body);//debug purposes
+                                }, function error(response) {
+                                });
+                            break;
+                        case 1:
+                            obiectComandaAux.cantitateComanda = obiectComandaAux.cantitateComanda + 1;
+                            this.$http.put('api/ObiectComanda/PutObiect', obiectComandaAux).then(
+                                function success(response) {
+                                    //Vue.set(this.cart.obiecteComanda, index, obiectComandaAux);
+                                    //this.cart.obiecteComanda = [...this.cart.obiecteComanda]; //spread operator
+                                    //this.cart.obiecteComanda[index].cantitateComanda = obiectComandaAux.cantitateComanda;
+                                    this.GetCart(); //logica e prea mare ca sa o reproduc aici.
+                                    console.log(response.body);//debug purposes
+                                }, function error(response) {
+                                });
+                            break;
+                    }
+                }
             },
             created() {
                 this.LocalStorageGetClient();

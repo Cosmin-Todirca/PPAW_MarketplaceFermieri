@@ -10,6 +10,7 @@ namespace BusinessLayer_DBFirst.Interfaces
         ReadComandaDTO Get(int Id);
         ReadComandaDTO ReadNewOrder(int idClient);
         void Update(UpdateComandaDTO updatedComanda);
+        void UpdateAndStockUpdate(UpdateComandaDTO updatedComanda);
         void Delete(int id);
     }
 }
